@@ -1,0 +1,105 @@
+{
+  "name": "frontend-base-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "vue-cli-service --open serve",
+    "secure": "vue-cli-service --https --open serve",
+    "report": "vue-cli-service build --report",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "config": "vue-cli-service --mode production > config.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "core-js": "^3.6.5",
+    "moment": "^2.26.0",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuetify": "^2.2.29",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.3.1",
+    "@vue/cli-plugin-eslint": "^4.3.1",
+    "@vue/cli-plugin-pwa": "^4.3.1",
+    "@vue/cli-plugin-router": "^4.3.1",
+    "@vue/cli-plugin-vuex": "^4.3.1",
+    "@vue/cli-service": "^4.3.1",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.1.0",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "material-design-icons-iconfont": "^5.0.1",
+    "node-sass": "^4.14.1",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.4.4",
+    "webpack-bundle-analyzer": "^3.8.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "settings": {
+      "import/extensions": [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".vue"
+      ]
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/airbnb"
+    ],
+    "rules": {
+      "comma-dangle": "off",
+      "no-param-reassign": "off",
+      "space-before-function-paren": "off",
+      "no-use-before-define": "off",
+      "consistent-return": "off",
+      "no-underscore-dangle": "off",
+      "no-console": "off",
+      "no-nested-ternary": "off",
+      "guard-for-in": "off",
+      "no-restricted-syntax": "off",
+      "no-shadow": "off",
+      "object-shorthand": "off",
+      "max-len": "off",
+      "arrow-parens": "off",
+      "import/no-extraneous-dependencies": "off",
+      "no-plusplus": "off",
+      "array-callback-return": "off",
+      "vue/no-use-v-if-with-v-for": "off",
+      "vue/valid-v-on": "off",
+      "no-prototype-builtins": "off",
+      "no-return-assign": "off",
+      "no-bitwise": "off",
+      "no-async-promise-executor": "off",
+      "operator-assignment": "off",
+      "no-else-return": "off",
+      "no-restricted-globals": "off",
+      "radix": "off",
+      "prefer-template": "off",
+      "one-var": "off",
+      "one-var-declaration-per-line": "off",
+      "no-lonely-if": "off",
+      "no-mixed-operators": "off",
+      "object-curly-newline": "off",
+      "no-unused-expressions": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
