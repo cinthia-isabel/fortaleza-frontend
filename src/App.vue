@@ -23,7 +23,6 @@ import { mapState } from 'vuex';
 import AppSidenav from '@/layout/AppSidenav.vue';
 import AppNavbar from '@/layout/AppNavbar.vue';
 import AppFooter from '@/layout/AppFooter.vue';
-import AppNotifications from '@/plugins/notifications/AppNotifications.vue';
 import AppProgress from '@/plugins/progress-bar/AppProgress.vue';
 import AppConfirm from '@/plugins/modal/AppConfirm.vue';
 import AppAlert from '@/plugins/modal/AppAlert.vue';
@@ -43,7 +42,6 @@ export default {
     AppSidenav,
     AppNavbar,
     AppFooter,
-    AppNotifications,
     AppProgress,
     AppConfirm,
     AppAlert,

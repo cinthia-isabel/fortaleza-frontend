@@ -4,13 +4,11 @@ import Message from '@/plugins/message/message';
 import Storage from '@/plugins/storage';
 import Service from '@/plugins/service';
 import Datetime from '@/plugins/datetime';
-import Notifications from '@/plugins/notifications/notification';
 import Progress from '@/plugins/progress-bar/progress';
 import Loading from '@/plugins/loading/loading';
 import Util from '@/plugins/util';
 import Modal from '@/plugins/modal/modal';
 import App from './App.vue';
-import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
@@ -24,7 +22,6 @@ Vue.use(Util);
 Vue.use(Modal);
 Vue.use(Loading);
 Vue.use(Datetime);
-Vue.use(Notifications);
 Vue.use(Service, {
   apiUrl: process.env.VUE_APP_API_URL,
   baseServer: process.env.VUE_APP_BASE_SERVER,
