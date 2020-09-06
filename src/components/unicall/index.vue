@@ -86,9 +86,8 @@
                     <v-textarea
                       v-model="form.motivo"
                       color="primary"
-                      label="Motivo de la oración *"
+                      label="Motivo de la oración"
                       outlined
-                      :rules="[val => !!val || 'El campo no puede estar vacio']"
                       hide-details
                       class="mb-2"
                       dense
@@ -96,8 +95,9 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
-                      label="Notas de seguimiento"
+                      label="Notas de seguimiento *"
                       v-model="form.notasSeguimiento"
+                      :rules="[val => !!val || 'El campo no puede estar vacio']"
                       hide-details
                       dense
                       outlined
