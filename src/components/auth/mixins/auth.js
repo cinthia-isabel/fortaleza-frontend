@@ -55,13 +55,16 @@ export default {
       try {
         const storevuex = this.$store;
         router = router || this.$router;
+        if (this.$storage.getUser()) {
+          await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 0 });
+        }
         this.$storage.removeUser();
         this.$storage.remove('menu');
         this.$storage.remove('token');
         this.$storage.remove('sidenav');
         this.$storage.remove('permissions');
         this.cleanData(storevuex);
-        router.push('login');
+        router.push('/');
       } catch (error) {
         this.$message.error(error.message || 'Ocurrio un error a tratar de conectarse con ciudadania digital');
       }
