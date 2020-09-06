@@ -53,7 +53,7 @@ export default {
       Progress.start();
       url = getUrl(url, data);
       if (process.env.VUE_APP_DEBUG_MODE) {
-        console.group('Petición con DataService:');
+        console.log('Petición con DataService:');
         console.info('URL:', method.toUpperCase(), url);
         if (data) {
           console.info('Params:', data);
