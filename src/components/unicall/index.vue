@@ -13,10 +13,10 @@
       <template slot="items" slot-scope="items">
         <tr>
           <td>
-            <v-tooltip bottom color="info lighten-1">
+            <v-tooltip bottom color="success lighten-1">
               <template v-slot:activator="{ on }">
                 <v-btn icon v-on="on" @click="showForm(items)">
-                  <v-icon color="info">phone</v-icon>
+                  <v-icon color="success">phone</v-icon>
                 </v-btn>
               </template>
               <span>Atender llamada</span>
@@ -236,14 +236,7 @@ export default {
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
     form: {},
-    filters: [
-      {
-        field: 'nombres',
-        label: 'Nombres',
-        type: 'text',
-        typeG: 'String'
-      }
-    ],
+    filters: [],
   }),
   watch: {
     mCalendar (date) {

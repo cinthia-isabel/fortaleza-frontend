@@ -14,8 +14,8 @@ const opts = {
   theme: {
     themes: {
       light: {
-        primary: '#002635',
-        secondary: '#004B68',
+        primary: '#2d504e',
+        secondary: '#407471',
         accent: '#82B1FF',
         info: '#1680c2',
         warning: '#f9c100',
@@ -23,8 +23,8 @@ const opts = {
         success: '#449935'
       },
       dark: {
-        primary: '#002635',
-        secondary: '#004B68',
+        primary: '#2d504e',
+        secondary: '#407471',
         accent: '#82B1FF',
         info: '#1680c2',
         warning: '#f9c100',
