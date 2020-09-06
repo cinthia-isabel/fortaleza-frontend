@@ -337,19 +337,18 @@ export default {
           this.options.page = 1;
         }
         let data = await this.$service.list(this.url, query);
-        if (data.datos) {
-          data = data.datos;
+        if (data.rows) {
           const items = data[this.attribute];
-          const n = parseInt(data.count / this.options.itemsPerPage);
-          const isHigher = n * this.options.itemsPerPage >= data.count;
+          const n = parseInt(data.total / this.options.itemsPerPage);
+          const isHigher = n * this.options.itemsPerPage >= data.total;
           this.numbers = [...Array(n > 0 ? isHigher ? n : n + 1 : 1).keys()].map(item => item + 1);
-          const { count } = data;
+          const { total } = data;
           items.map((el) => {
             if (el.estado !== undefined) {
               el.active = el.estado === 'INACTIVO' ? 'INACTIVE' : 'ACTIVE';
             }
           });
-          this.setPropsDataTable(false, items, count);
+          this.setPropsDataTable(false, items, total);
         } else {
           this.setPropsDataTable();
         }

@@ -2,17 +2,30 @@ import axios from 'axios';
 
 export default {
   methods: {
-    async getCode () {
+    async loginWithCredentials (user, pass) {
       const url = process.env.VUE_APP_BASE_SERVER;
       try {
         const request = {
-          method: 'GET',
-          url: `${url}/public/codigo`,
+          method: 'post',
+          data: {
+            user,
+            pass
+          },
+          url: `${url}login`,
           responseType: 'json'
         };
         const response = await axios(request);
-        this.$storage.set('oauth2_state', response.data.codigo);
-        window.location.href = new URL(response.data.url);
+        const data = response.data;
+        if (data.finalizado) {
+          this.$storage.set('token', data.data.token);
+          this.$storage.setUser(data.data.user);
+          this.$message.success('Usuario exitosamente autenticado');
+          this.$store.commit('setMain', true);
+          this.$router.push('/unicall');
+          this.reload();
+        } else {
+          this.$message.error(data.mensaje);
+        }
       } catch (error) {
         this.$message.error(error.message || 'Ocurrio un error a tratar de conectarse con ciudadania digital');
       }
@@ -28,44 +41,15 @@ export default {
     },
     async logout (router) {
       try {
-        const url = process.env.VUE_APP_BASE_SERVER;
-        const codigo = this.$storage.get('oauth2_state');
-        if (codigo) {
-          if (this.$storage.existUser()) {
-            const request = {
-              method: 'POST',
-              url: `${url}public/logout`,
-              responseType: 'json',
-              data: {
-                codigo,
-                usuario: this.$storage.getUser().usuario
-              }
-            };
-            const response = await axios(request);
-            this.cleanData(this.$store);
-            window.location.href = new URL(`${response.data.url}`);
-          } else {
-            const storevuex = this.$store;
-            router = router || this.$router;
-            this.$storage.removeUser();
-            this.$storage.remove('menu');
-            this.$storage.remove('token');
-            this.$storage.remove('sidenav');
-            this.$storage.remove('permissions');
-            this.cleanData(storevuex);
-            router.push('/login');
-          }
-        } else {
-          const storevuex = this.$store;
-          router = router || this.$router;
-          this.$storage.removeUser();
-          this.$storage.remove('menu');
-          this.$storage.remove('token');
-          this.$storage.remove('sidenav');
-          this.$storage.remove('permissions');
-          this.cleanData(storevuex);
-          router.push('/login');
-        }
+        const storevuex = this.$store;
+        router = router || this.$router;
+        this.$storage.removeUser();
+        this.$storage.remove('menu');
+        this.$storage.remove('token');
+        this.$storage.remove('sidenav');
+        this.$storage.remove('permissions');
+        this.cleanData(storevuex);
+        router.push('login');
       } catch (error) {
         this.$message.error(error.message || 'Ocurrio un error a tratar de conectarse con ciudadania digital');
       }

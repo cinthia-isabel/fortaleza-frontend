@@ -18,13 +18,13 @@
       <v-list-item class="pa-0 ma-0">
         <v-list-item-content class="mb-0 pb-0">
           <v-list-item-title class="title--sidebar pb-2">
-            <span>Frontend Base</span>
+            <span>Fortaleza</span>
           </v-list-item-title>
           <v-list-item-subtitle>
           <v-card-title class="container--userinfo">
-              <div class="initial--name text-center"> {{ user && user.nombres ? user.nombres.charAt(0) : 'U'}}</div>
-              <div>{{ user.nombres }}</div>
-              <div class="fs8 mt-2 white--text">{{ user.email ? user.email : 'usuario@demo.com'}}</div>
+              <div class="initial--name text-center"> {{ user && user.nombre ? user.nombre.charAt(0) : 'U'}}</div>
+              <div class="white--text">{{ user.nombre }} {{ user.paterno }}</div>
+              <div class="fs8 mt-2 white--text">{{ user.correo ? user.correo : 'usuario@demo.com'}}</div>
             </v-card-title>
           </v-list-item-subtitle>
         </v-list-item-content>

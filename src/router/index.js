@@ -11,18 +11,13 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "dashboard" */ '../components/dashboard'),
-  },
-  {
-    path: '/',
     name: 'Main',
     component: () => import(/* webpackChunkName: "dashboard" */ '../components/dashboard'),
   },
   {
-    path: '/usuarios',
-    name: 'Usuarios',
-    component: () => import(/* webpackChunkName: "usuarios" */ '../components/usuarios'),
+    path: '/unicall',
+    name: 'Unicall',
+    component: () => import(/* webpackChunkName: "unicall" */ '../components/unicall'),
   },
   {
     path: '/404',

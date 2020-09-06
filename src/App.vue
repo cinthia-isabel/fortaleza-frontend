@@ -1,16 +1,15 @@
 <template>
   <v-app :class="{ 'app-login': !auth }">
     <app-sidenav v-if="auth"></app-sidenav>
-    <app-navbar v-if="auth"></app-navbar>
-    <v-content v-if="main">
+    <app-navbar></app-navbar>
+    <v-content>
       <div class="main">
         <transition :name="transitionName" mode="out-in">
           <router-view/>
         </transition>
       </div>
     </v-content>
-    <app-footer v-if="auth"></app-footer>
-    <app-notifications/>
+    <app-footer v-if="auth && false"></app-footer>
     <app-confirm/>
     <app-alert/>
     <app-loading/>
@@ -30,14 +29,11 @@ import AppLoading from '@/plugins/loading/AppLoading.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
-const PageNoLogin = ['login'];
+const PageNoLogin = ['login', 'dashboard'];
 
 export default {
   name: 'App',
   mixins: [Auth],
-  mounted () {
-    Notification.requestPermission();
-  },
   components: {
     AppSidenav,
     AppNavbar,

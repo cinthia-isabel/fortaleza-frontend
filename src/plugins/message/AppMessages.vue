@@ -18,7 +18,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-btn dark icon @click.native.prevent="remove">
+      <v-btn dark icon @click.prevent="remove">
         <v-icon color="white">close</v-icon>
       </v-btn>
     </v-snackbar>
