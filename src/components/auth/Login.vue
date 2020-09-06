@@ -70,7 +70,7 @@ export default {
      */
     login () {
       if (this.$refs.form.validate()) {
-        this.loginWithCredentials(this.user, this.password);
+        this.loginWithCredentials(this.user.trim(), this.password.trim());
       } else {
         this.$message.error('Por favor revise los campos requeridos');
       }

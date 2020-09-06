@@ -20,7 +20,6 @@ export default {
           this.$storage.set('token', data.data.token);
           this.$storage.setUser(data.data.user);
           this.$message.success('Usuario exitosamente autenticado');
-          this.$store.commit('setMain', true);
           this.$storage.set('menu', [
             {
               url: 'logout',
@@ -33,8 +32,11 @@ export default {
               icon: 'phone'
             },
           ]);
+          this.$nextTick(() => {
+            this.$store.commit('setAuth', true);
+            this.$store.commit('setMain', true);
+          });
           this.$router.push('/unicall');
-          this.reload();
         } else {
           this.$message.error(data.mensaje);
         }

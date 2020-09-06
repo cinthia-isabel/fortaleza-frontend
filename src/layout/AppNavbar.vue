@@ -5,15 +5,15 @@
     fixed
     :height="auth ? 40 : 80"
     class="fortaleza--navbar"
-    :class="[auth ? 'app-navbar' : 'view--init', $store.state.layout.miniVariant ? 'isMiniVariant' : auth ? 'normalMiniVariant' : '']"
+    :class="['app-navbar', 'view--init', $store.state.layout.miniVariant ? 'isMiniVariant' : auth ? 'normalMiniVariant' : '']"
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
     <v-toolbar-title class="title-fortaleza">VOCES DE FORTALEZA </v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- Seccion botones -->
-    <v-card elevation="0" class="enlaces">
-      <template v-if="!auth">
+    <v-card elevation="0" class="enlaces" v-if="!auth">
+      <template>
         <v-btn class="ml-1" text color="success" outlined>
           ¿ Quienes Somos ? 
         </v-btn>
