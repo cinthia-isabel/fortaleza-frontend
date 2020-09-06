@@ -21,6 +21,18 @@ export default {
           this.$storage.setUser(data.data.user);
           this.$message.success('Usuario exitosamente autenticado');
           this.$store.commit('setMain', true);
+          this.$storage.set('menu', [
+            {
+              url: 'logout',
+              label: 'Cerrar sesión',
+              icon: 'power_settings_new'
+            },
+            {
+              url: 'unicall',
+              label: 'Llamadas entrantes',
+              icon: 'phone'
+            },
+          ]);
           this.$router.push('/unicall');
           this.reload();
         } else {
