@@ -93,7 +93,8 @@
       "no-lonely-if": "off",
       "no-mixed-operators": "off",
       "object-curly-newline": "off",
-      "no-unused-expressions": "off"
+      "no-unused-expressions": "off",
+      "no-multiple-empty-lines": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
