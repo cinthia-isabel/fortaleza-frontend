@@ -257,6 +257,10 @@
               </v-expansion-panels>
             </v-container>
           </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="secondary" @click="historialSeguimiento = false">Cerrar seguimiento</v-btn>
+          </v-card-actions>
         </v-card>
     </v-dialog>
   </div>
