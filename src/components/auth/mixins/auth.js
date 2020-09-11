@@ -15,7 +15,7 @@ export default {
           responseType: 'json'
         };
         const response = await axios(request);
-        const data = response.data;
+        const { data } = response.data;
         if (data.finalizado) {
           this.$storage.set('token', data.data.token);
           this.$storage.setUser(data.data.user);
@@ -30,6 +30,11 @@ export default {
               url: 'unicall',
               label: 'Llamadas entrantes',
               icon: 'phone'
+            },
+            {
+              url: 'usuarios',
+              label: 'Usuarios',
+              icon: 'supervised_user_circle'
             },
           ]);
           this.$nextTick(() => {

@@ -93,6 +93,29 @@
                       dense
                     ></v-textarea>
                   </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <span>Motivo de la llamada:</span>
+                    <v-radio-group
+                      v-model="form.motivoLlamada"
+                      color="primary"
+                      :rules="[val => !!val || 'No puede estar vacio']"
+                    >
+                      <v-radio
+                        label="Primer motivo de la BD"
+                        value="salvador"
+                        color="primary"
+                        hide-details
+                        dense
+                      ></v-radio>
+                      <v-radio
+                        label="Segundo motivo de la BD"
+                        value="llamada"
+                        color="primary"
+                        hide-details
+                        dense
+                      ></v-radio>
+                    </v-radio-group>
+                  </v-col>
                   <v-col cols="12" sm="12" md="12" class="mb-2">
                     <v-btn large block height="30" dense color="primary" @click="historialSeguimiento = true">
                       <v-icon class="mr-2">timeline</v-icon>

@@ -20,6 +20,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "unicall" */ '../components/unicall'),
   },
   {
+    path: '/usuarios',
+    name: 'Usuarios',
+    component: () => import(/* webpackChunkName: "usuarios" */ '../components/usuarios'),
+  },
+  {
     path: '/404',
     component: () => import(/* webpackChunkName: "notFound" */ '../layout/AppNotFound.vue'),
   }
