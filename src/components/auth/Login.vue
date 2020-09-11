@@ -19,7 +19,7 @@
                 outlined
                 dense
                 v-model="user"
-                color="success"
+                color="primary"
                 :rules="[val => !!val || 'Este campo es requerido']"
               ></v-text-field>
             </v-col>
@@ -30,7 +30,7 @@
                 outlined
                 dense
                 v-model="password"
-                color="success"
+                color="primary"
                 :rules="[val => !!val || 'Este campo es requerido']"
                 label="Contraseña"
                  :type="show ? 'text' : 'password'"
@@ -42,7 +42,7 @@
               cols="12"
               class="pt-2 text-center"
             >
-              <v-btn type="submit" color="success">Ingresar</v-btn>
+              <v-btn type="submit" color="primary">Ingresar</v-btn>
             </v-col>
           </v-row>
         </v-form>

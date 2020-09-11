@@ -9,25 +9,57 @@
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title-fortaleza">VOCES DE FORTALEZA </v-toolbar-title>
+    <v-toolbar-title class="title-fortaleza">{{ breakpoints.includes($vuetify.breakpoint.name) ? 'VOCES DE FORTALEZA' : 'VOCES DE..'}} </v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- Seccion botones -->
     <v-card elevation="0" class="enlaces" v-if="!auth">
-      <template>
-        <v-btn class="ml-1" text color="success" outlined>
-          ¿ Quienes Somos ? 
+      <template v-if="breakpoints.includes($vuetify.breakpoint.name)">
+        <v-btn class="ml-1" text color="primary" outlined>
+          ¿ Quienes Somos ?
         </v-btn>
-        <v-btn class="ml-1" text color="success" outlined>
+        <v-btn class="ml-1" text color="primary" outlined>
           Contáctanos
         </v-btn>
-        <v-btn class="ml-1" text color="success" outlined>
+        <v-btn class="ml-1" text color="primary" outlined>
           Noticias
         </v-btn>
-      </template>
-      <template v-if="!auth">
-        <v-btn class="ml-1" text color="success" outlined @click.native="$router.push('login')">
+        <v-btn class="ml-1" v-if="!auth" text color="primary" outlined @click.native="$router.push('login')">
           Ingresar
         </v-btn>
+      </template>
+      <template v-else>
+        <v-tooltip bottom color="primary">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on">
+              <v-icon dark>account_circle</v-icon>
+            </v-btn>
+          </template>
+          <span> ¿ Quienes Somos ? </span>
+        </v-tooltip>
+        <v-tooltip bottom color="primary">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on">
+              <v-icon dark>account_balance</v-icon>
+            </v-btn>
+          </template>
+          <span> Contáctanos </span>
+        </v-tooltip>
+        <v-tooltip bottom color="primary">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on">
+              <v-icon dark>article</v-icon>
+            </v-btn>
+          </template>
+          <span> Noticias </span>
+        </v-tooltip>
+        <v-tooltip bottom color="primary" v-if="!auth">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on" @click.native="$router.push('login')">
+              <v-icon dark>security</v-icon>
+            </v-btn>
+          </template>
+          <span> Ingresar al sistema </span>
+        </v-tooltip>
       </template>
     </v-card>
   </v-app-bar>
@@ -40,7 +72,8 @@ import Auth from '@/components/auth/mixins/auth';
 export default {
   mixins: [Auth],
   data: () => ({
-    clipped: false
+    clipped: false,
+    breakpoints: ['md', 'lg', 'xl']
   }),
   methods: {
     handleMiniVariant () {
@@ -107,8 +140,11 @@ body.fullscreen {
     width: 100%;
     padding: 0;
     margin: 0;
+    .enlaces--devices {
+      display: block;
+    }
     .title-fortaleza {
-      color: $success;
+      color: $primary;
       font-weight: 500;
       text-transform: uppercase;
       font-family: $fontFamilyTitilliumWeb;
