@@ -108,10 +108,32 @@
                     <v-switch
                       v-model="form.recibirDios"
                       color="primary"
-                      label="¿Acepto al Señor como su salvador?"
+                      label="¿Acepta al Señor?"
                       hide-details
                       dense
                     ></v-switch>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12" v-if="form.recibirDios">
+                    <v-radio-group
+                      v-model="form.salvador"
+                      color="primary"
+                      :rules="[val => !!val || 'No puede estar vacio']"
+                    >
+                      <v-radio
+                        label="Ya tiene al señor como su salvador"
+                        value="salvador"
+                        color="primary"
+                        hide-details
+                        dense
+                      ></v-radio>
+                      <v-radio
+                        label="Acepto al señor durante la llamada"
+                        value="llamada"
+                        color="primary"
+                        hide-details
+                        dense
+                      ></v-radio>
+                    </v-radio-group>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-switch
@@ -215,6 +237,7 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import CrudTable from '@/plugins/crud-table/CrudTable.vue';
 import actions from '@/plugins/crud-table/mixins/crud-table';
+
 dayjs.extend(isBetween);
 
 export default {
