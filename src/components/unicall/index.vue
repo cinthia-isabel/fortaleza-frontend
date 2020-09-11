@@ -93,6 +93,12 @@
                       dense
                     ></v-textarea>
                   </v-col>
+                  <v-col cols="12" sm="12" md="12" class="mb-2">
+                    <v-btn large block height="30" dense color="primary" @click="historialSeguimiento = true">
+                      <v-icon class="mr-2">timeline</v-icon>
+                      Ver historial del seguimiento
+                    </v-btn>
+                  </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
                       label="Notas de seguimiento *"
@@ -230,6 +236,29 @@
           </v-card-text>
         </v-card>
     </v-dialog>
+    <!-- Dialogo seguimiento -->
+    <v-dialog v-model="historialSeguimiento" persistent width="620">
+        <v-card>
+          <v-card-title>
+            <span class="headline primary--text">Historial de seguimiento</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-expansion-panels accordion>
+                <v-expansion-panel
+                  v-for="(item,i) in 5"
+                  :key="i"
+                >
+                  <v-expansion-panel-header>Item</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </v-container>
+          </v-card-text>
+        </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -247,6 +276,7 @@ export default {
     mCalendar: null,
     minDate: undefined,
     maxDate: undefined,
+    historialSeguimiento: null,
     url: 'unicall',
     item: {},
     order: ['createdAt', 'DESC'],
