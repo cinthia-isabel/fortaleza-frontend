@@ -20,28 +20,33 @@ export default {
           this.$storage.set('token', data.data.token);
           this.$storage.setUser(data.data.user);
           this.$message.success('Usuario exitosamente autenticado');
-          this.$storage.set('menu', [
+          let menus = [
             {
               url: 'llamadas',
               label: 'Nuevas llamadas',
               icon: 'phone'
-            },
-            {
-              url: 'usuarios',
-              label: 'Usuarios',
-              icon: 'supervised_user_circle'
-            },
-            {
-              url: 'logout',
-              label: 'Cerrar sesión',
-              icon: 'power_settings_new'
-            },
-          ]);
+            }
+          ];
+          if (data.data.user.id_rol === 1) {
+            menus = menus.concat([
+              {
+                url: 'usuarios',
+                label: 'Usuarios',
+                icon: 'supervised_user_circle'
+              }
+            ]);
+          }
+          menus = menus.concat([{
+            url: 'logout',
+            label: 'Cerrar sesión',
+            icon: 'power_settings_new'
+          }]);
+          this.$storage.set('menu', menus);
+          this.$router.push('/llamadas');
           this.$nextTick(() => {
             this.$store.commit('setAuth', true);
             this.$store.commit('setMain', true);
           });
-          this.$router.push('/llamadas');
         } else {
           this.$message.error(data.mensaje);
         }
