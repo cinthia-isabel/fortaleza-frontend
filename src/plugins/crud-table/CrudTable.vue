@@ -27,6 +27,7 @@
           <template v-slot:activator="{ on }">
             <v-btn
               text
+              :id="idRefresh"
               @click.native="getData(true)"
               :class="`btn-refresh ${idRefresh}`"
               v-on="on"><v-icon color="primary">refresh</v-icon>
@@ -336,7 +337,7 @@ export default {
           };
           this.options.page = 1;
         }
-        let data = await this.$service.list(this.url, query);
+        const data = await this.$service.list(this.url, query);
         if (data.rows) {
           const items = data[this.attribute];
           const n = parseInt(data.total / this.options.itemsPerPage);

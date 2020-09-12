@@ -19,7 +19,7 @@
               text
               class="ml-3"
               v-on="on"
-              @click.native.stop="dialogAdd = true;"
+              @click.native.stop="form = {}; dialogAdd = true;"
               slot="activator"
             ><v-icon dark class="mr-2">add</v-icon>Agregar llamada </v-btn>
           </template>
@@ -40,7 +40,7 @@
             </v-tooltip>
           </td>
           <td>{{ items.items.Celular }}</td>
-          <td>{{ items.items.FechaLlamada }}</td>
+          <td>{{ $datetime.format(items.items.FechaLlamada, 'dd/MM/YYYY') }}</td>
           <td>{{ items.items.Tipo }}</td>
         </tr>
       </template>
@@ -280,60 +280,21 @@
     <v-dialog v-model="dialogAdd" persistent width="450">
         <v-card>
           <v-card-title>
-            <span class="headline">Agregar usuario</span>
+            <span class="headline primary--text">Agregar nueva llamada</span>
           </v-card-title>
           <v-card-text>
             <v-container>
-              <v-form ref="form" @submit.prevent="sendData">
+              <v-form ref="formAdd" @submit.prevent="sendDataAdd">
                 <v-row no-gutters>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-menu
-                      v-model="menuDatepicker"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      max-width="290px"
-                      min-width="250px"
-                    >
-                      <template v-slot:activator="{ on }">
-                        <v-text-field
-                          v-model="form.fechaLlamada"
-                          @change="handleSelectDate"
-                          label="Fecha de la llamada *"
-                          hint="DD/MM/YYYY"
-                          clearable
-                          persistent-hint
-                          outlined
-                          hide-details
-                          class="mb-2"
-                          dense
-                          prepend-icon="event"
-                          v-on="on"
-                          autocomplete="off"
-                          :rules="[val => !!val || 'La fecha no puede estar vacio']"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker
-                        @click:date="handleSelectDate"
-                        locale="es-EN"
-                        color="primary"
-                        v-model="mCalendar"
-                        no-title
-                        @input="menuDatepicker = false"
-                        :min="minDate || undefined "
-                        :max="maxDate || undefined "
-                      >
-                      </v-date-picker>
-                    </v-menu>
-                  </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
                       v-model="form.celular"
                       color="primary"
-                      label="Celular"
+                      label="Celular *"
                       outlined
                       hide-details
                       dense
+                      :rules="[val => !!val || 'No puede estar vacio']"
                       class="mb-2"
                       required></v-text-field>
                   </v-col>
@@ -358,17 +319,6 @@
                         dense
                       ></v-radio>
                     </v-radio-group>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-textarea
-                      label="Observaciones"
-                      v-model="form.obs"
-                      :rules="[val => !!val || 'El campo no puede estar vacio']"
-                      hide-details
-                      dense
-                      outlined
-                      class="mb-2"
-                    ></v-textarea>
                   </v-col>
                   <v-col cols="12">
                     <small class="red--text">* Todos los campos marcados son requeridos</small>
@@ -470,6 +420,32 @@ export default {
           }
           this.$waiting(false);
           this.dialog = false;
+          setTimeout(() => {
+            this.updateList();
+          }, 100);
+        } else {
+          this.$waiting(false);
+          this.$message.error('Faltan campos por llenar');
+        }
+      } catch (error) {
+        this.$waiting(false);
+      }
+    },
+    async sendDataAdd () {
+      try {
+        if (this.$refs.formAdd.validate()) {
+          this.$waiting(true, 'Espere unos segundos por favor...');
+          const response = await this.$service.post('nueva-llamada', {
+            ...this.form,
+            OrigenRegistro: 'SISTEMA'
+          });
+          if (response.finalizado) {
+            this.$message.success('Registro exitosamente actualizado');
+          } else {
+            this.$message.error(response.mensaje);
+          }
+          this.$waiting(false);
+          this.dialogAdd = false;
           setTimeout(() => {
             this.updateList();
           }, 100);
