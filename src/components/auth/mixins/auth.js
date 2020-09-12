@@ -15,20 +15,15 @@ export default {
           responseType: 'json'
         };
         const response = await axios(request);
-        const { data } = response.data;
+        const { data } = response;
         if (data.finalizado) {
           this.$storage.set('token', data.data.token);
           this.$storage.setUser(data.data.user);
           this.$message.success('Usuario exitosamente autenticado');
           this.$storage.set('menu', [
             {
-              url: 'logout',
-              label: 'Cerrar sesión',
-              icon: 'power_settings_new'
-            },
-            {
-              url: 'unicall',
-              label: 'Llamadas entrantes',
+              url: 'llamadas',
+              label: 'Nuevas llamadas',
               icon: 'phone'
             },
             {
@@ -36,12 +31,17 @@ export default {
               label: 'Usuarios',
               icon: 'supervised_user_circle'
             },
+            {
+              url: 'logout',
+              label: 'Cerrar sesión',
+              icon: 'power_settings_new'
+            },
           ]);
           this.$nextTick(() => {
             this.$store.commit('setAuth', true);
             this.$store.commit('setMain', true);
           });
-          this.$router.push('/unicall');
+          this.$router.push('/llamadas');
         } else {
           this.$message.error(data.mensaje);
         }

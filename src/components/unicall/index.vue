@@ -9,6 +9,23 @@
       :order="order"
       :custom="true"
     >
+      <!-- Boton agregar usuarios -->
+      <template slot="buttons">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn
+              color="primary"
+              dark
+              text
+              class="ml-3"
+              v-on="on"
+              @click.native.stop="dialogAdd = true;"
+              slot="activator"
+            ><v-icon dark class="mr-2">add</v-icon>Agregar llamada </v-btn>
+          </template>
+          <span> Agregar llamada </span>
+        </v-tooltip>
+      </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
       <template slot="items" slot-scope="items">
         <tr>
@@ -259,6 +276,116 @@
           </v-card-text>
         </v-card>
     </v-dialog>
+    <!-- Dialogo -->
+    <v-dialog v-model="dialogAdd" persistent width="450">
+        <v-card>
+          <v-card-title>
+            <span class="headline">Agregar usuario</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-form ref="form" @submit.prevent="sendData">
+                <v-row no-gutters>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-menu
+                      v-model="menuDatepicker"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="250px"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                          v-model="form.fechaLlamada"
+                          @change="handleSelectDate"
+                          label="Fecha de la llamada *"
+                          hint="DD/MM/YYYY"
+                          clearable
+                          persistent-hint
+                          outlined
+                          hide-details
+                          class="mb-2"
+                          dense
+                          prepend-icon="event"
+                          v-on="on"
+                          autocomplete="off"
+                          :rules="[val => !!val || 'La fecha no puede estar vacio']"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        @click:date="handleSelectDate"
+                        locale="es-EN"
+                        color="primary"
+                        v-model="mCalendar"
+                        no-title
+                        @input="menuDatepicker = false"
+                        :min="minDate || undefined "
+                        :max="maxDate || undefined "
+                      >
+                      </v-date-picker>
+                    </v-menu>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field
+                      v-model="form.celular"
+                      color="primary"
+                      label="Celular"
+                      outlined
+                      hide-details
+                      dense
+                      class="mb-2"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-radio-group
+                      v-model="form.tipo"
+                      color="primary"
+                      :rules="[val => !!val || 'No puede estar vacio']"
+                    >
+                      <v-radio
+                        label="Llamada"
+                        value="LLAMADA"
+                        color="primary"
+                        hide-details
+                        dense
+                      ></v-radio>
+                      <v-radio
+                        label="Whatsapp"
+                        value="WHATSAPP"
+                        color="primary"
+                        hide-details
+                        dense
+                      ></v-radio>
+                    </v-radio-group>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-textarea
+                      label="Observaciones"
+                      v-model="form.obs"
+                      :rules="[val => !!val || 'El campo no puede estar vacio']"
+                      hide-details
+                      dense
+                      outlined
+                      class="mb-2"
+                    ></v-textarea>
+                  </v-col>
+                  <v-col cols="12">
+                    <small class="red--text">* Todos los campos marcados son requeridos</small>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-card-actions class="mb-0 pb-0">
+                      <v-spacer></v-spacer>
+                      <v-btn text @click="dialogAdd = false">Cancelar</v-btn>
+                      <v-btn type="submit" color="primary">Guardar</v-btn>
+                    </v-card-actions>
+                  </v-col>
+                </v-row>
+              </v-form>
+            </v-container>
+          </v-card-text>
+        </v-card>
+    </v-dialog>
     <!-- Dialogo seguimiento -->
     <v-dialog v-model="historialSeguimiento" persistent width="620">
         <v-card>
@@ -301,6 +428,7 @@ export default {
   data: () => ({
     dialog: null,
     mCalendar: null,
+    dialogAdd: null,
     minDate: undefined,
     maxDate: undefined,
     historialSeguimiento: null,
