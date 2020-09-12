@@ -20,6 +20,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "llamadas" */ '../components/unicall'),
   },
   {
+    path: '/seguimiento-llamadas',
+    name: 'seguimiento-llamadas',
+    component: () => import(/* webpackChunkName: "seguimiento-llamadas" */ '../components/seguimiento-llamadas'),
+  },
+  {
     path: '/usuarios',
     name: 'Usuarios',
     component: () => import(/* webpackChunkName: "usuarios" */ '../components/usuarios'),

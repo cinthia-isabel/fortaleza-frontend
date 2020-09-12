@@ -25,7 +25,12 @@ export default {
               url: 'llamadas',
               label: 'Nuevas llamadas',
               icon: 'phone'
-            }
+            },
+            {
+              url: 'seguimiento-llamadas',
+              label: 'Seguimiento de llamadas',
+              icon: 'contact_phone'
+            },
           ];
           if (data.data.user.id_rol === 1) {
             menus = menus.concat([
