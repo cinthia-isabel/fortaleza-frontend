@@ -29,7 +29,7 @@ export default {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 150px);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -37,9 +37,8 @@ export default {
   overflow: hidden !important;
   .app-quienes-somos__background {
     width: 100%;
-    background: url('../../../public/img/manos.jpeg') no-repeat;
+    background: url('../../../public/img/quienes-somos.jpeg') no-repeat;
     position: fixed;
-    filter: opacity(.6);
     background-size: cover;
     background-position: center;
     top: 80px;

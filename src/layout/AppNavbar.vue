@@ -9,7 +9,7 @@
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title-fortaleza">FORTALEZA</v-toolbar-title>
+    <v-toolbar-title class="title-fortaleza"></v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- Seccion botones -->
     <v-card elevation="0" class="enlaces" v-if="!auth">
@@ -135,10 +135,12 @@ body.fullscreen {
     .title-fortaleza {
       color: $primary;
       font-weight: 500;
-      text-transform: uppercase;
-      font-family: $fontFamilyTitilliumWeb;
       line-height: 50px;
-      font-size: 1.5rem;
+      background: url('../../public/img/logo-fortaleza.jpg') no-repeat;
+      background-position: center;
+      background-size: contain;
+      height: 80px;
+      width: 200px;
       user-select: none;
     }
     .fortaleza--navbar__details {
