@@ -9,23 +9,6 @@
       :order="order"
       :custom="true"
     >
-      <!-- Boton agregar usuarios -->
-      <template slot="buttons" v-if="$storage.getUser().id_rol === 1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              color="primary"
-              dark
-              text
-              class="ml-3"
-              v-on="on"
-              @click.native.stop="form = {}; dialogAdd = true;"
-              slot="activator"
-            ><v-icon dark class="mr-2">add</v-icon>Agregar llamada </v-btn>
-          </template>
-          <span> Agregar llamada </span>
-        </v-tooltip>
-      </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
       <template slot="items" slot-scope="items">
         <tr>
@@ -39,9 +22,17 @@
               <span>Atender llamada</span>
             </v-tooltip>
           </td>
-          <td>{{ items.items.Celular }}</td>
-          <td>{{ $datetime.format(items.items.FechaLlamada, 'dd/MM/YYYY') }}</td>
-          <td>{{ items.items.Tipo }}</td>
+          <td>{{ items.items.Nombres }}</td>
+          <td>{{ items.items.Apellidos }}</td>
+          <td>{{ items.items.celular }}</td>
+          <td>{{ $datetime.format(items.items.FechaComp, 'dd/MM/YYYY') }}</td>
+          <td>{{ items.items.HoraComp }}</td>
+          <td>{{ items.items.TipoComp }}</td>
+          <td>
+            <v-icon color="primary">
+               {{ items.items.AceptSenor === 'SI' ? 'done' : 'clear'}}
+            </v-icon>
+          </td>
         </tr>
       </template>
     </crud-table>
@@ -376,20 +367,25 @@ dayjs.extend(isBetween);
 export default {
   mixins: [actions],
   data: () => ({
+    interval: null,
     dialog: null,
     mCalendar: null,
     dialogAdd: null,
     minDate: undefined,
     maxDate: undefined,
     historialSeguimiento: null,
-    url: 'unicall',
+    url: 'seguimiento-llamadas',
     item: {},
     order: ['createdAt', 'DESC'],
     headers: [
       { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
-      { text: 'Celular', align: 'center', value: 'Celular', sortable: true },
-      { text: 'Fecha de la llamada', value: 'FechaLlamada', sortable: true },
+      { text: 'Nombres', align: 'center', value: 'Nombres', sortable: true },
+      { text: 'Apellidos', align: 'center', value: 'Apellidos' },
+      { text: 'Celular', align: 'center', value: 'celular' },
+      { text: 'Fecha de seguimiento', align: 'center', value: 'FechaComp' },
+      { text: 'Hora de seguimiento', align: 'center', value: 'HoraComp' },
       { text: 'Tipo', align: 'center', value: 'Tipo' },
+      { text: 'Acepta al señor', align: 'center', value: 'AcepSenor' },
     ],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
@@ -400,6 +396,14 @@ export default {
     mCalendar (date) {
       this.form.fechaSeguimiento = this.formatDate(date);
     }
+  },
+  destroyed() {
+    clearInterval(this.interval);
+  },
+  mounted () {
+    this.interval = setInterval(() => {
+      this.updateList();
+    }, 60000);
   },
   methods: {
     async sendData () {

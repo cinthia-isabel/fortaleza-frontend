@@ -101,7 +101,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
-                      v-model="form.motivo"
+                      v-model="form.motivoOracion"
                       color="primary"
                       label="Motivo de la oración"
                       outlined
@@ -118,26 +118,15 @@
                       :rules="[val => !!val || 'No puede estar vacio']"
                     >
                       <v-radio
-                        label="Primer motivo de la BD"
-                        value="salvador"
-                        color="primary"
-                        hide-details
-                        dense
-                      ></v-radio>
-                      <v-radio
-                        label="Segundo motivo de la BD"
-                        value="llamada"
+                        v-for="motivo in aMotivos"
+                        :key="motivo.id_motivo"
+                        :label="motivo.Descripcion"
+                        :value="motivo.id_motivo"
                         color="primary"
                         hide-details
                         dense
                       ></v-radio>
                     </v-radio-group>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12" class="mb-2">
-                    <v-btn large block height="30" dense color="primary" @click="historialSeguimiento = true">
-                      <v-icon class="mr-2">timeline</v-icon>
-                      Ver historial del seguimiento
-                    </v-btn>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
@@ -161,20 +150,20 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12" v-if="form.recibirDios">
                     <v-radio-group
-                      v-model="form.salvador"
+                      v-model="form.recibirDiosOpcion"
                       color="primary"
                       :rules="[val => !!val || 'No puede estar vacio']"
                     >
                       <v-radio
                         label="Ya tiene al señor como su salvador"
-                        value="salvador"
+                        value="SALVADOR"
                         color="primary"
                         hide-details
                         dense
                       ></v-radio>
                       <v-radio
                         label="Acepto al señor durante la llamada"
-                        value="llamada"
+                        value="LLAMADA"
                         color="primary"
                         hide-details
                         dense
@@ -336,33 +325,6 @@
           </v-card-text>
         </v-card>
     </v-dialog>
-    <!-- Dialogo seguimiento -->
-    <v-dialog v-model="historialSeguimiento" persistent width="620">
-        <v-card>
-          <v-card-title>
-            <span class="headline primary--text">Historial de seguimiento</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-expansion-panels accordion>
-                <v-expansion-panel
-                  v-for="(item,i) in 5"
-                  :key="i"
-                >
-                  <v-expansion-panel-header>Item</v-expansion-panel-header>
-                  <v-expansion-panel-content>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="secondary" @click="historialSeguimiento = false">Cerrar seguimiento</v-btn>
-          </v-card-actions>
-        </v-card>
-    </v-dialog>
   </div>
 </template>
 <script>
@@ -376,12 +338,13 @@ dayjs.extend(isBetween);
 export default {
   mixins: [actions],
   data: () => ({
+    interval: null,
     dialog: null,
     mCalendar: null,
     dialogAdd: null,
+    aMotivos: [],
     minDate: undefined,
     maxDate: undefined,
-    historialSeguimiento: null,
     url: 'unicall',
     item: {},
     order: ['createdAt', 'DESC'],
@@ -400,6 +363,15 @@ export default {
     mCalendar (date) {
       this.form.fechaSeguimiento = this.formatDate(date);
     }
+  },
+  destroyed() {
+    clearInterval(this.interval);
+  },
+  async mounted () {
+    this.aMotivos = await this.$service.get('motivo-llamada');
+    this.interval = setInterval(() => {
+      this.updateList();
+    }, 60000);
   },
   methods: {
     async sendData () {
