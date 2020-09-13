@@ -156,7 +156,7 @@
                     >
                       <v-radio
                         label="Ya tiene al señor como su salvador"
-                        value="SALVADOR"
+                        value="SIEMPRE"
                         color="primary"
                         hide-details
                         dense
@@ -240,12 +240,12 @@
                       <v-radio
                         color="primary"
                         label="Llamada"
-                        value="llamada"
+                        value="LLAMADA"
                       ></v-radio>
                       <v-radio
                         color="primary"
                         label="Whatsapp"
-                        value="whatsapp"
+                        value="WHATSAPP"
                       ></v-radio>
                     </v-radio-group>
                   </v-col>
