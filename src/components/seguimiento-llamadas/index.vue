@@ -16,10 +16,10 @@
             <v-tooltip bottom color="success lighten-1">
               <template v-slot:activator="{ on }">
                 <v-btn icon v-on="on" @click="showForm(items)">
-                  <v-icon color="success">phone</v-icon>
+                  <v-icon color="success">timeline</v-icon>
                 </v-btn>
               </template>
-              <span>Atender llamada</span>
+              <span>Realizar seguimiento</span>
             </v-tooltip>
           </td>
           <td>{{ items.items.Nombres }}</td>
@@ -40,7 +40,7 @@
     <v-dialog v-model="dialog" persistent width="620">
         <v-card>
           <v-card-title>
-            <span class="headline">Número: {{ item.Celular }}, Tipo de contacto: {{ item.Tipo }}</span>
+            <span class="headline">Número: {{ itemSeleccionado.celular }}, Tipo de contacto: {{ itemSeleccionado.TipoComp }}</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -59,7 +59,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
-                      v-model="form.nombres"
+                      v-model="form.Nombres"
                       color="primary"
                       label="Nombres"
                       outlined
@@ -70,20 +70,9 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
-                      v-model="form.apellidoPaterno"
+                      v-model="form.Apellidos"
                       color="primary"
-                      label="Apellido Paterno"
-                      outlined
-                      hide-details
-                      dense
-                      class="mb-2"
-                      required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      v-model="form.apellidoMaterno"
-                      color="primary"
-                      label="Apellido Materno"
+                      label="Apellidos"
                       outlined
                       hide-details
                       dense
@@ -92,7 +81,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
-                      v-model="form.motivo"
+                      v-model="form.motivoOracion"
                       color="primary"
                       label="Motivo de la oración"
                       outlined
@@ -109,15 +98,10 @@
                       :rules="[val => !!val || 'No puede estar vacio']"
                     >
                       <v-radio
-                        label="Primer motivo de la BD"
-                        value="salvador"
-                        color="primary"
-                        hide-details
-                        dense
-                      ></v-radio>
-                      <v-radio
-                        label="Segundo motivo de la BD"
-                        value="llamada"
+                        v-for="motivo in aMotivos"
+                        :key="motivo.id_motivo"
+                        :label="motivo.Descripcion"
+                        :value="motivo.id_motivo"
                         color="primary"
                         hide-details
                         dense
@@ -143,29 +127,29 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-switch
-                      v-model="form.recibirDios"
+                      v-model="form.aceptSenor"
                       color="primary"
                       label="¿Acepta al Señor?"
                       hide-details
                       dense
                     ></v-switch>
                   </v-col>
-                  <v-col cols="12" sm="12" md="12" v-if="form.recibirDios">
+                  <v-col cols="12" sm="12" md="12" v-if="form.aceptSenor">
                     <v-radio-group
-                      v-model="form.salvador"
+                      v-model="form.aceptSenorOpcion"
                       color="primary"
                       :rules="[val => !!val || 'No puede estar vacio']"
                     >
                       <v-radio
                         label="Ya tiene al señor como su salvador"
-                        value="salvador"
+                        value="SIEMPRE"
                         color="primary"
                         hide-details
                         dense
                       ></v-radio>
                       <v-radio
                         label="Acepto al señor durante la llamada"
-                        value="llamada"
+                        value="LLAMADA"
                         color="primary"
                         hide-details
                         dense
@@ -371,11 +355,12 @@ export default {
     dialog: null,
     mCalendar: null,
     dialogAdd: null,
+    aMotivos: [],
     minDate: undefined,
     maxDate: undefined,
     historialSeguimiento: null,
     url: 'seguimiento-llamadas',
-    item: {},
+    itemSeleccionado: {},
     order: ['createdAt', 'DESC'],
     headers: [
       { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
@@ -400,7 +385,8 @@ export default {
   destroyed() {
     clearInterval(this.interval);
   },
-  mounted () {
+  async mounted () {
+    this.aMotivos = await this.$service.get('motivo-llamada');
     this.interval = setInterval(() => {
       this.updateList();
     }, 60000);
@@ -412,9 +398,9 @@ export default {
           this.$waiting(true, 'Espere unos segundos por favor...');
           const response = await this.$service.post('llamada-finalizada', {
             ...this.form,
-            idCall: this.item.idCall,
+            idCall: this.itemSeleccionado.idCall,
             interno: this.$storage.getUser().interno,
-            celular: this.item.Celular,
+            celular: this.itemSeleccionado.Celular,
             idUser: this.$storage.getUser().id
           });
           if (response.finalizado) {
@@ -482,8 +468,15 @@ export default {
       this.dialog = false;
     },
     async showForm ({ items }) {
-      this.item = items;
-      this.form = {};
+      this.itemSeleccionado = items;
+      this.form = items;
+      const info = await this.$service.get(`info-seguimiento/${items.id_reg}`);
+      this.form.motivoOracion = info.registrosTbSeg[0].MotivoOracion;
+      this.form.motivoLlamada = info.registrosTbSeg[0].MotivoLlamada;
+
+      this.form.aceptSenor = info.registrosTbRegTel[0].AceptSenor;
+      this.form.aceptSenorOpcion = info.registrosTbRegTel[0].AceptSenorOpcion;
+
       await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 1 });
       this.dialog = true;
     },
