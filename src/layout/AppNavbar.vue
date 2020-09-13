@@ -9,19 +9,16 @@
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title-fortaleza">{{ breakpoints.includes($vuetify.breakpoint.name) ? 'VOCES DE FORTALEZA' : 'VOCES DE..'}} </v-toolbar-title>
+    <v-toolbar-title class="title-fortaleza">FORTALEZA</v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- Seccion botones -->
     <v-card elevation="0" class="enlaces" v-if="!auth">
       <template v-if="breakpoints.includes($vuetify.breakpoint.name)">
-        <v-btn class="ml-1" text color="primary" outlined>
+        <v-btn class="ml-1" text color="primary" outlined @click="$router.push('quienes-somos')">
           ¿ Quienes Somos ?
         </v-btn>
         <v-btn class="ml-1" text color="primary" outlined>
           Contáctanos
-        </v-btn>
-        <v-btn class="ml-1" text color="primary" outlined>
-          Noticias
         </v-btn>
         <v-btn class="ml-1" v-if="!auth" text color="primary" outlined @click.native="$router.push('login')">
           Ingresar
@@ -30,7 +27,7 @@
       <template v-else>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on">
+            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on" @click="$router.push('quienes-somos')">
               <v-icon dark>account_circle</v-icon>
             </v-btn>
           </template>
@@ -43,14 +40,6 @@
             </v-btn>
           </template>
           <span> Contáctanos </span>
-        </v-tooltip>
-        <v-tooltip bottom color="primary">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on">
-              <v-icon dark>article</v-icon>
-            </v-btn>
-          </template>
-          <span> Noticias </span>
         </v-tooltip>
         <v-tooltip bottom color="primary" v-if="!auth">
           <template v-slot:activator="{ on, attrs }">

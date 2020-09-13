@@ -108,7 +108,6 @@
                       <template v-slot:activator="{ on }">
                         <v-text-field
                           v-model="form.fechaSeguimiento"
-                          @change="handleSelectDate"
                           label="Fecha de Nacimiento *"
                           hint="DD/MM/YYYY"
                           clearable
@@ -124,7 +123,6 @@
                         ></v-text-field>
                       </template>
                       <v-date-picker
-                        @click:date="handleSelectDate"
                         locale="es-EN"
                         color="primary"
                         v-model="mCalendar"

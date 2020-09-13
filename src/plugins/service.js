@@ -38,6 +38,9 @@ export default {
     const filterResponse = (response) => {
       Progress.close();
       const data = response.data || response.datos || response;
+      if (data && data.mensaje === 'jwt expired') {
+        router.push('/login');
+      }
       if (data.error) {
         Message.error(data.error);
         return null;

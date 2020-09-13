@@ -56,6 +56,14 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      this.$storage.removeUser();
+      this.$storage.remove('menu');
+      this.$storage.remove('token');
+      this.$storage.remove('sidenav');
+      this.$storage.remove('permissions');
+      this.$store.commit('setAuth', false);
+      this.$store.commit('setMain', false);
+      this.$router.push('/');
     });
   }
 };

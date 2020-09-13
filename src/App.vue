@@ -29,7 +29,7 @@ import AppLoading from '@/plugins/loading/AppLoading.vue';
 import Auth from '@/components/auth/mixins/auth';
 
 // Páginas que no necesitan autenticación/token/sesión
-const PageNoLogin = ['login', 'dashboard'];
+const PageNoLogin = ['login', 'dashboard', 'quienes-somos'];
 
 export default {
   name: 'App',
