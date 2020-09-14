@@ -141,7 +141,7 @@ body.fullscreen {
       background-position: center;
       background-size: contain;
       height: 80px;
-      width: 200px;
+      width: 150px;
       user-select: none;
     }
     .fortaleza--navbar__details {
