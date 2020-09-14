@@ -251,66 +251,6 @@
           </v-card-text>
         </v-card>
     </v-dialog>
-    <!-- Dialogo -->
-    <v-dialog v-model="dialogAdd" persistent width="450">
-        <v-card>
-          <v-card-title>
-            <span class="headline primary--text">Agregar nueva llamada</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-form ref="formAdd" @submit.prevent="sendDataAdd">
-                <v-row no-gutters>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      v-model="form.celular"
-                      color="primary"
-                      label="Celular *"
-                      outlined
-                      hide-details
-                      dense
-                      :rules="[val => !!val || 'No puede estar vacio']"
-                      class="mb-2"
-                      required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-radio-group
-                      v-model="form.tipo"
-                      color="primary"
-                      :rules="[val => !!val || 'No puede estar vacio']"
-                    >
-                      <v-radio
-                        label="Llamada"
-                        value="LLAMADA"
-                        color="primary"
-                        hide-details
-                        dense
-                      ></v-radio>
-                      <v-radio
-                        label="Whatsapp"
-                        value="WHATSAPP"
-                        color="primary"
-                        hide-details
-                        dense
-                      ></v-radio>
-                    </v-radio-group>
-                  </v-col>
-                  <v-col cols="12">
-                    <small class="red--text">* Todos los campos marcados son requeridos</small>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-actions class="mb-0 pb-0">
-                      <v-spacer></v-spacer>
-                      <v-btn text @click="dialogAdd = false">Cancelar</v-btn>
-                      <v-btn type="submit" color="primary">Guardar</v-btn>
-                    </v-card-actions>
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-container>
-          </v-card-text>
-        </v-card>
-    </v-dialog>
     <!-- Dialogo seguimiento -->
     <v-dialog v-model="historialSeguimiento" persistent width="620">
         <v-card>
@@ -321,12 +261,12 @@
             <v-container>
               <v-expansion-panels accordion>
                 <v-expansion-panel
-                  v-for="(item,i) in 5"
+                  v-for="(item,i) in aHistorial"
                   :key="i"
                 >
-                  <v-expansion-panel-header>Item</v-expansion-panel-header>
+                  <v-expansion-panel-header>{{ $datetime.format(item.Fecha_reg, 'dd/MM/YYYY')}} - {{ item.Nombre }} {{ item.Paterno }} {{ item.Materno }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {{ item.Seguimiento}}
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -476,6 +416,8 @@ export default {
 
       this.form.aceptSenor = info.registrosTbRegTel[0].AceptSenor;
       this.form.aceptSenorOpcion = info.registrosTbRegTel[0].AceptSenorOpcion;
+
+      this.aHistorial = info.registrosHistorial;
 
       await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 1 });
       this.dialog = true;
