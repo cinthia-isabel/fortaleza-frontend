@@ -226,12 +226,12 @@
                       <v-radio
                         color="primary"
                         label="Llamada"
-                        value="llamada"
+                        value="LLAMADA"
                       ></v-radio>
                       <v-radio
                         color="primary"
                         label="Whatsapp"
-                        value="whatsapp"
+                        value="WHATSAPP"
                       ></v-radio>
                     </v-radio-group>
                   </v-col>
