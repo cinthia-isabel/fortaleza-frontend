@@ -21,17 +21,22 @@
               v-on="on"
               @click.native.stop="createNewUser"
               slot="activator"
-            ><v-icon dark class="mr-2">person_add</v-icon>Agregar Usuario </v-btn>
+            >
+              <v-icon dark class="mr-2">person_add</v-icon>Agregar Usuario
+            </v-btn>
           </template>
-          <span> Agregar usuario </span>
+          <span>Agregar usuario</span>
         </v-tooltip>
       </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
       <template slot="items" slot-scope="items">
         <tr>
+          <td>{{ items.items.Nombre }}</td>
+          <td>{{ items.items.Paterno }} {{ items.items.Materno }}</td>
+          <td>{{ items.items.Interno }}</td>
           <td>{{ items.items.Celular }}</td>
-          <td>{{ items.items.FechaLlamada }}</td>
-          <td>{{ items.items.Tipo }}</td>
+          <td>{{ items.items.Correo }}</td>
+          <td>{{ items.items.Ciudad }}</td>
           <td>
             <v-tooltip bottom color="info lighten-1">
               <template v-slot:activator="{ on }">
@@ -55,122 +60,124 @@
     </crud-table>
     <!-- Dialogo -->
     <v-dialog v-model="dialog" persistent width="450">
-        <v-card>
-          <v-card-title>
-            <span class="headline">Agregar usuario</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-form ref="form" @submit.prevent="sendData">
-                <v-row no-gutters>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      v-model="form.nombres"
+      <v-card>
+        <v-card-title>
+          <span class="headline">Agregar usuario</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-form ref="form" @submit.prevent="sendData">
+              <v-row no-gutters>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    v-model="form.nombres"
+                    color="primary"
+                    label="Nombres"
+                    outlined
+                    hide-details
+                    dense
+                    class="mb-2"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    v-model="form.apellidoPaterno"
+                    color="primary"
+                    label="Apellido Paterno"
+                    outlined
+                    hide-details
+                    dense
+                    class="mb-2"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    v-model="form.apellidoMaterno"
+                    color="primary"
+                    label="Apellido Materno"
+                    outlined
+                    hide-details
+                    dense
+                    class="mb-2"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-menu
+                    v-model="menuDatepicker"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    max-width="290px"
+                    min-width="250px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        v-model="form.fechaSeguimiento"
+                        label="Fecha de Nacimiento *"
+                        hint="DD/MM/YYYY"
+                        clearable
+                        persistent-hint
+                        outlined
+                        hide-details
+                        class="mb-2"
+                        dense
+                        prepend-icon="event"
+                        v-on="on"
+                        autocomplete="off"
+                        :rules="[val => !!val || 'La fecha no puede estar vacio']"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      locale="es-EN"
                       color="primary"
-                      label="Nombres"
-                      outlined
-                      hide-details
-                      dense
-                      class="mb-2"
-                      required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      v-model="form.apellidoPaterno"
-                      color="primary"
-                      label="Apellido Paterno"
-                      outlined
-                      hide-details
-                      dense
-                      class="mb-2"
-                      required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      v-model="form.apellidoMaterno"
-                      color="primary"
-                      label="Apellido Materno"
-                      outlined
-                      hide-details
-                      dense
-                      class="mb-2"
-                      required></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-menu
-                      v-model="menuDatepicker"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      max-width="290px"
-                      min-width="250px"
-                    >
-                      <template v-slot:activator="{ on }">
-                        <v-text-field
-                          v-model="form.fechaSeguimiento"
-                          label="Fecha de Nacimiento *"
-                          hint="DD/MM/YYYY"
-                          clearable
-                          persistent-hint
-                          outlined
-                          hide-details
-                          class="mb-2"
-                          dense
-                          prepend-icon="event"
-                          v-on="on"
-                          autocomplete="off"
-                          :rules="[val => !!val || 'La fecha no puede estar vacio']"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker
-                        locale="es-EN"
-                        color="primary"
-                        v-model="mCalendar"
-                        no-title
-                        @input="menuDatepicker = false"
-                        :min="minDate || undefined "
-                        :max="maxDate || undefined "
-                      >
-                      </v-date-picker>
-                    </v-menu>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      label="Telefono/Celular"
-                      v-model="form.celular"
-                      :rules="[val => !!val || 'El campo no puede estar vacio']"
-                      hide-details
-                      dense
-                      outlined
-                      class="mb-2"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field
-                      label="Correo electrónico"
-                      v-model="form.correoElectronico"
-                      :rules="[val => !!val || 'El campo no puede estar vacio']"
-                      hide-details
-                      dense
-                      outlined
-                      class="mb-2"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <small class="red--text">* Todos los campos marcados son requeridos</small>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-card-actions class="mb-0 pb-0">
-                      <v-spacer></v-spacer>
-                      <v-btn text @click="dialog = false">Cancelar</v-btn>
-                      <v-btn type="submit" color="primary">Guardar</v-btn>
-                    </v-card-actions>
-                  </v-col>
-                </v-row>
-              </v-form>
-            </v-container>
-          </v-card-text>
-        </v-card>
+                      v-model="mCalendar"
+                      no-title
+                      @input="menuDatepicker = false"
+                      :min="minDate || undefined "
+                      :max="maxDate || undefined "
+                    ></v-date-picker>
+                  </v-menu>
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    label="Telefono/Celular"
+                    v-model="form.celular"
+                    :rules="[val => !!val || 'El campo no puede estar vacio']"
+                    hide-details
+                    dense
+                    outlined
+                    class="mb-2"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    label="Correo electrónico"
+                    v-model="form.correoElectronico"
+                    :rules="[val => !!val || 'El campo no puede estar vacio']"
+                    hide-details
+                    dense
+                    outlined
+                    class="mb-2"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <small class="red--text">* Todos los campos marcados son requeridos</small>
+                </v-col>
+                <v-col cols="12">
+                  <v-card-actions class="mb-0 pb-0">
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="dialog = false">Cancelar</v-btn>
+                    <v-btn type="submit" color="primary">Guardar</v-btn>
+                  </v-card-actions>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-container>
+        </v-card-text>
+      </v-card>
     </v-dialog>
   </div>
 </template>
@@ -185,14 +192,23 @@ export default {
     mCalendar: null,
     minDate: undefined,
     maxDate: undefined,
-    url: 'unicall',
+    url: 'usuarios',
     item: {},
     order: ['createdAt', 'DESC'],
     headers: [
+      { text: 'Nombres', align: 'center', value: 'Nombre' },
+      { text: 'Apellidos', align: 'center', value: 'Paterno' },
+      { text: 'Interno', align: 'center', value: 'Interno', sortable: true },
       { text: 'Celular', align: 'center', value: 'Celular', sortable: true },
-      { text: 'Fecha de la llamada', value: 'FechaLlamada', sortable: true },
-      { text: 'Tipo', align: 'center', value: 'Tipo' },
-      { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' }
+      { text: 'Correo', align: 'center', value: 'Correo' },
+      { text: 'Ciudad', align: 'center', value: 'Ciudad' },
+      {
+        text: 'Acciones',
+        divider: false,
+        sortable: false,
+        align: 'center',
+        value: 'ACTIONS',
+      },
     ],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
@@ -200,25 +216,25 @@ export default {
     filters: [],
   }),
   watch: {
-    mCalendar (date) {
+    mCalendar(date) {
       this.form.fechaSeguimiento = this.formatDate(date);
-    }
+    },
   },
   methods: {
-    deleteUser () {
+    deleteUser() {
       this.$confirm('¿Desea eliminar el usuario?', () => {
         this.$message.success('usuario exitosamente eliminado');
       });
     },
-    createNewUser () {
+    createNewUser() {
       this.dialog = true;
     },
-    async sendData () {
+    async sendData() {
       try {
         if (this.$refs.form.validate()) {
           this.$waiting(true, 'Espere unos segundos por favor...');
           const response = await this.$service.post('usuario', {
-            ...this.form
+            ...this.form,
           });
           if (response.finalizado) {
             this.$message.success('Registro exitosamente actualizado');
@@ -242,7 +258,7 @@ export default {
      * @function formatDate
      * @description Funcion para formatear fechas
      */
-    formatDate (date, character = '-') {
+    formatDate(date, character = '-') {
       let dateFormatted;
       if (!date) return null;
       if (character === '-') {
@@ -254,33 +270,41 @@ export default {
       }
       return dateFormatted;
     },
-    async cancelCall () {
-      await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 1, conectado: 1 });
+    async cancelCall() {
+      await this.$service.put('estado-usuario', {
+        idUser: this.$storage.getUser().id,
+        libre: 1,
+        conectado: 1,
+      });
       this.dialog = false;
     },
-    async showForm ({ items }) {
+    async showForm({ items }) {
       this.item = items;
       this.form = {};
-      await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 1 });
+      await this.$service.put('estado-usuario', {
+        idUser: this.$storage.getUser().id,
+        libre: 0,
+        conectado: 1,
+      });
       this.dialog = true;
-    }
+    },
   },
   components: {
-    CrudTable
-  }
+    CrudTable,
+  },
 };
 </script>
 <style lang="scss" scoped>
-  @import '../../scss/variables.scss';
-  .user--selected {
-    border-radius: 50% !important;
-    width: 75px;
-    height: 75px;
-    z-index: 2;
-    border: 2px solid $black;
-    background: $white;
-    div {
-      border-radius: 50%;
-    }
+@import "../../scss/variables.scss";
+.user--selected {
+  border-radius: 50% !important;
+  width: 75px;
+  height: 75px;
+  z-index: 2;
+  border: 2px solid $black;
+  background: $white;
+  div {
+    border-radius: 50%;
   }
+}
 </style>
