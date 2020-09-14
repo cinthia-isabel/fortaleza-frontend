@@ -9,7 +9,7 @@
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title-fortaleza"></v-toolbar-title>
+    <v-toolbar-title class="title-fortaleza" @click="$router.push('/')"></v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- Seccion botones -->
     <v-card elevation="0" class="enlaces" v-if="!auth">
@@ -17,7 +17,7 @@
         <v-btn class="ml-1" text color="primary" outlined @click="$router.push('quienes-somos')">
           ¿ Quienes Somos ?
         </v-btn>
-        <v-btn class="ml-1" text color="primary" outlined>
+        <v-btn class="ml-1" text color="primary" outlined @click="$router.push('contactanos')">
           Contáctanos
         </v-btn>
         <v-btn class="ml-1" v-if="!auth" text color="primary" outlined @click.native="$router.push('login')">
@@ -35,7 +35,7 @@
         </v-tooltip>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on">
+            <v-btn class="ml-1" icon text color="primary" outlined v-bind="attrs" v-on="on" @click="$router.push('contactanos')">
               <v-icon dark>account_balance</v-icon>
             </v-btn>
           </template>
@@ -133,6 +133,7 @@ body.fullscreen {
       display: block;
     }
     .title-fortaleza {
+      cursor: pointer !important;
       color: $primary;
       font-weight: 500;
       line-height: 50px;

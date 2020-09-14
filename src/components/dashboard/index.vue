@@ -4,25 +4,26 @@
       hide-delimiter-background
       hide-delimiters
       continuous
+      :show-arrows="false"
       cycle
       height="calc(100vh - 80px)"
       class="carrousel"
     >
       <v-carousel-item
-        key="1"
-        src="img/manos.jpeg"
-        reverse-transition="fade-transition"
-        transition="fade-transition"
-      ></v-carousel-item>
-      <v-carousel-item
         key="2"
-        src="img/callcenter.jpeg"
+        src="img/espiritu.jpeg"
         reverse-transition="fade-transition"
         transition="fade-transition"
       ></v-carousel-item>
       <v-carousel-item
         key="3"
-        src="img/tristeza.jpeg"
+        src="img/fuertes.jpeg"
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      ></v-carousel-item>
+      <v-carousel-item
+        key="6"
+        src="img/tres-manos.jpeg"
         reverse-transition="fade-transition"
         transition="fade-transition"
       ></v-carousel-item>

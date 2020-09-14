@@ -1,21 +1,40 @@
+<template>
+  <div class="app-contactanos">
+    <div class="app-contactanos__background"></div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  data () {
+    return {
+      show: false,
+      user: null,
+      password: null
+    };
+  }
+};
+</script>
+
+<style lang="scss">
 @import '../../scss/variables.scss';
 
-.app-login {
+.app-contactanos {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 150px);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   overflow: hidden !important;
-  .app-login__background {
+  .app-contactanos__background {
     width: 100%;
-    background: url('../../../public/img/espiritu.jpeg') no-repeat;
+    background: #0F0F0F url('../../../public/img/llamanos.jpeg') no-repeat;
     position: fixed;
-    filter: opacity(.6);
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     top: 80px;
     left: 0;
@@ -23,7 +42,7 @@
     bottom: 0;
     z-index: 1;
   }
-  .app-login__container {
+  .app-contactanos__container {
     position: relative;
     z-index: 3;
     display: flex;
@@ -44,7 +63,7 @@
       padding-bottom: 15px;
       text-align: center;
     }
-    .app-login__boton {
+    .app-contactanos__boton {
       margin-top: 15px;
       font-size: 0.9rem;
       letter-spacing: -0.1px;
@@ -60,3 +79,4 @@
     }
   }
 }
+</style>

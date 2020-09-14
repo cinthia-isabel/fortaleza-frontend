@@ -25,6 +25,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "quienes-somos" */ '../components/quienes-somos'),
   },
   {
+    path: '/contactanos',
+    name: 'contactanos',
+    component: () => import(/* webpackChunkName: "contactanos" */ '../components/contactanos'),
+  },
+  {
     path: '/seguimiento-llamadas',
     name: 'seguimiento-llamadas',
     component: () => import(/* webpackChunkName: "seguimiento-llamadas" */ '../components/seguimiento-llamadas'),
