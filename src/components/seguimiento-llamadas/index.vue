@@ -222,7 +222,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12" v-if="form.contactame">
                     <h4>Seguimiento: </h4>
-                    <v-radio-group v-model="form.seguimiento" :rules="[val => !!val || 'Este campo no puede estar vacio']">
+                    <v-radio-group v-model="form.tipoSeguimiento" :rules="[val => !!val || 'Este campo no puede estar vacio']">
                       <v-radio
                         color="primary"
                         label="Llamada"
@@ -296,6 +296,7 @@ export default {
     mCalendar: null,
     dialogAdd: null,
     aMotivos: [],
+    aHistorial: [],
     minDate: undefined,
     maxDate: undefined,
     historialSeguimiento: null,
@@ -336,12 +337,9 @@ export default {
       try {
         if (this.$refs.form.validate()) {
           this.$waiting(true, 'Espere unos segundos por favor...');
-          const response = await this.$service.post('llamada-finalizada', {
+          const response = await this.$service.post('seguimiento-finalizado', {
             ...this.form,
-            idCall: this.itemSeleccionado.idCall,
-            interno: this.$storage.getUser().interno,
-            celular: this.itemSeleccionado.Celular,
-            idUser: this.$storage.getUser().id
+            idReg: this.itemSeleccionado.id_reg
           });
           if (response.finalizado) {
             this.$message.success('Registro exitosamente actualizado');
@@ -350,32 +348,6 @@ export default {
           }
           this.$waiting(false);
           this.dialog = false;
-          setTimeout(() => {
-            this.updateList();
-          }, 100);
-        } else {
-          this.$waiting(false);
-          this.$message.error('Faltan campos por llenar');
-        }
-      } catch (error) {
-        this.$waiting(false);
-      }
-    },
-    async sendDataAdd () {
-      try {
-        if (this.$refs.formAdd.validate()) {
-          this.$waiting(true, 'Espere unos segundos por favor...');
-          const response = await this.$service.post('nueva-llamada', {
-            ...this.form,
-            OrigenRegistro: 'SISTEMA'
-          });
-          if (response.finalizado) {
-            this.$message.success('Registro exitosamente actualizado');
-          } else {
-            this.$message.error(response.mensaje);
-          }
-          this.$waiting(false);
-          this.dialogAdd = false;
           setTimeout(() => {
             this.updateList();
           }, 100);
