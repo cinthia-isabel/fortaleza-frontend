@@ -339,7 +339,8 @@ export default {
           this.$waiting(true, 'Espere unos segundos por favor...');
           const response = await this.$service.post('seguimiento-finalizado', {
             ...this.form,
-            idReg: this.itemSeleccionado.id_reg
+            idReg: this.itemSeleccionado.id_reg,
+            idSeg: this.itemSeleccionado.id_seg
           });
           if (response.finalizado) {
             this.$message.success('Registro exitosamente actualizado');
@@ -382,13 +383,15 @@ export default {
     async showForm ({ items }) {
       this.itemSeleccionado = items;
       this.form = items;
+      delete this.form.AceptSenor;
       const info = await this.$service.get(`info-seguimiento/${items.id_reg}`);
       this.form.motivoOracion = info.registrosTbSeg[0].MotivoOracion;
       this.form.motivoLlamada = info.registrosTbSeg[0].MotivoLlamada;
-
-      this.form.aceptSenor = info.registrosTbRegTel[0].AceptSenor;
-      this.form.aceptSenorOpcion = info.registrosTbRegTel[0].AceptSenorOpcion;
-
+      this.form = {
+        ...this.form,
+        aceptSenor: info.registrosTbRegTel[0].AceptSenor === 'SI',
+        aceptSenorOpcion: info.registrosTbRegTel[0].AceptSenorOpcion
+      };
       this.aHistorial = info.registrosHistorial;
 
       await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 1 });
