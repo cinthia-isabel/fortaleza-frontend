@@ -10,6 +10,12 @@
       class="carrousel"
     >
       <v-carousel-item
+        key="1"
+        src="img/llamanos.jpeg"
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      ></v-carousel-item>
+      <v-carousel-item
         key="2"
         src="img/espiritu.jpeg"
         reverse-transition="fade-transition"
