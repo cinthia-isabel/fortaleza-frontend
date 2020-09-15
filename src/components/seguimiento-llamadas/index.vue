@@ -25,7 +25,7 @@
           <td>{{ items.items.Nombres }}</td>
           <td>{{ items.items.Apellidos }}</td>
           <td>{{ items.items.celular }}</td>
-          <td>{{ $datetime.format(items.items.FechaComp, 'dd/MM/YYYY') }}</td>
+          <td>{{ items.items.FechaComp }}</td>
           <td>{{ items.items.HoraComp }}</td>
           <td>{{ items.items.TipoComp }}</td>
           <td>
@@ -264,7 +264,7 @@
                   v-for="(item,i) in aHistorial"
                   :key="i"
                 >
-                  <v-expansion-panel-header>{{ $datetime.format(item.Fecha_reg, 'dd/MM/YYYY')}} - {{ item.Nombre }} {{ item.Paterno }} {{ item.Materno }}</v-expansion-panel-header>
+                  <v-expansion-panel-header>{{ item.Fecha_reg }} - {{ item.Nombre }} {{ item.Paterno }} {{ item.Materno }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     {{ item.Seguimiento}}
                   </v-expansion-panel-content>

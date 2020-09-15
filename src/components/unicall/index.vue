@@ -40,7 +40,7 @@
             </v-tooltip>
           </td>
           <td>{{ items.items.Celular }}</td>
-          <td>{{ $datetime.format(items.items.FechaLlamada, 'dd/MM/YYYY') }}</td>
+          <td>{{ items.items.FechaLlamada }}</td>
           <td>{{ items.items.Tipo }}</td>
         </tr>
       </template>
