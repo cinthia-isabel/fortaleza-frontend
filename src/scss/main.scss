@@ -23,4 +23,9 @@ body, html {
       white-space: nowrap;
     }
   }
+  .v-image__image--cover {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background: #0f0f0f !important;
+  }
 }
