@@ -415,8 +415,8 @@ export default {
       }
     }
     .input--search_page {
-      max-width: 120px;
-      width: 120px;
+      max-width: 75px;
+      width: 75px;
     }
   }
   .crud-table {
