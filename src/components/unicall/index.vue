@@ -79,9 +79,9 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
-                      v-model="form.apellidoPaterno"
+                      v-model="form.apellidos"
                       color="primary"
-                      label="Apellido Paterno"
+                      label="Apellidos"
                       outlined
                       hide-details
                       dense
@@ -90,9 +90,9 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
-                      v-model="form.apellidoMaterno"
+                      v-model="form.ciudad"
                       color="primary"
-                      label="Apellido Materno"
+                      label="Ciudad"
                       outlined
                       hide-details
                       dense
@@ -100,20 +100,20 @@
                       required></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <v-textarea
-                      v-model="form.motivoOracion"
+                    <v-text-field
+                      v-model="form.iglesiaCongregacion"
                       color="primary"
-                      label="Motivo de la oración"
+                      label="Iglesia o congregacion a la que asiste"
                       outlined
                       hide-details
-                      class="mb-2"
                       dense
-                    ></v-textarea>
+                      class="mb-2"
+                      required></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <span>Motivo de la llamada:</span>
+                    <span>Categoria de la llamada:</span>
                     <v-radio-group
-                      v-model="form.motivoLlamada"
+                      v-model="form.categoriaLlamada"
                       color="primary"
                       :rules="[val => !!val || 'No puede estar vacio']"
                     >
@@ -127,6 +127,17 @@
                         dense
                       ></v-radio>
                     </v-radio-group>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-textarea
+                      v-model="form.motivoLlamada"
+                      color="primary"
+                      label="Motivo de la llamada"
+                      outlined
+                      hide-details
+                      class="mb-2"
+                      dense
+                    ></v-textarea>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
@@ -328,12 +339,8 @@
   </div>
 </template>
 <script>
-import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
 import CrudTable from '@/plugins/crud-table/CrudTable.vue';
 import actions from '@/plugins/crud-table/mixins/crud-table';
-
-dayjs.extend(isBetween);
 
 export default {
   mixins: [actions],
@@ -469,12 +476,7 @@ export default {
     isValidDate () {
       setTimeout(() => {
         const date = this.form.fechaSeguimiento ? this.form.fechaSeguimiento.split('/') : [];
-        if (date.length > 2) {
-          const isValid = dayjs(new Date(date[2], date[1], date[0])).isValid();
-          if (!isValid) {
-            this.form.fechaSeguimiento = null;
-          }
-        } else {
+        if (date.length < 2) {
           this.form.fechaSeguimiento = null;
         }
       }, 100);

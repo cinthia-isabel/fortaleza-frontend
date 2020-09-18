@@ -24,6 +24,8 @@
           </td>
           <td>{{ items.items.Nombres }}</td>
           <td>{{ items.items.Apellidos }}</td>
+          <td>{{ items.items.Ciudad }}</td>
+          <td>{{ items.items.IglesiaCongregacion }}</td>
           <td>{{ items.items.celular }}</td>
           <td>{{ items.items.FechaComp }}</td>
           <td>{{ items.items.HoraComp }}</td>
@@ -80,20 +82,31 @@
                       required></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <v-textarea
-                      v-model="form.motivoOracion"
+                    <v-text-field
+                      v-model="form.Ciudad"
                       color="primary"
-                      label="Motivo de la oración"
+                      label="Ciudad"
                       outlined
                       hide-details
-                      class="mb-2"
                       dense
-                    ></v-textarea>
+                      class="mb-2"
+                      required></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
-                    <span>Motivo de la llamada:</span>
+                    <v-text-field
+                      v-model="form.IglesiaCongregacion"
+                      color="primary"
+                      label="Iglesia o congregacion a la que asiste"
+                      outlined
+                      hide-details
+                      dense
+                      class="mb-2"
+                      required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <span>Categoria de la llamada:</span>
                     <v-radio-group
-                      v-model="form.motivoLlamada"
+                      v-model="form.categoriaLlamada"
                       color="primary"
                       :rules="[val => !!val || 'No puede estar vacio']"
                     >
@@ -107,6 +120,17 @@
                         dense
                       ></v-radio>
                     </v-radio-group>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-textarea
+                      v-model="form.motivoLlamada"
+                      color="primary"
+                      label="Motivo de la llamada"
+                      outlined
+                      hide-details
+                      class="mb-2"
+                      dense
+                    ></v-textarea>
                   </v-col>
                   <v-col cols="12" sm="12" md="12" class="mb-2">
                     <v-btn large block height="30" dense color="primary" @click="historialSeguimiento = true">
@@ -281,12 +305,8 @@
   </div>
 </template>
 <script>
-import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
 import CrudTable from '@/plugins/crud-table/CrudTable.vue';
 import actions from '@/plugins/crud-table/mixins/crud-table';
-
-dayjs.extend(isBetween);
 
 export default {
   mixins: [actions],
@@ -307,6 +327,8 @@ export default {
       { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
       { text: 'Nombres', align: 'center', value: 'Nombres', sortable: true },
       { text: 'Apellidos', align: 'center', value: 'Apellidos' },
+      { text: 'Ciudad', align: 'center', value: 'Ciudad' },
+      { text: 'IglesiaCongregacion', align: 'center', value: 'IglesiaCongregacion' },
       { text: 'Celular', align: 'center', value: 'celular' },
       { text: 'Fecha de seguimiento', align: 'center', value: 'FechaComp' },
       { text: 'Hora de seguimiento', align: 'center', value: 'HoraComp' },
@@ -385,8 +407,8 @@ export default {
       this.form = items;
       delete this.form.AceptSenor;
       const info = await this.$service.get(`info-seguimiento/${items.id_reg}`);
-      this.form.motivoOracion = info.registrosTbSeg[0].MotivoOracion;
-      this.form.motivoLlamada = info.registrosTbSeg[0].MotivoLlamada;
+      this.form.motivoLlamada = info.registrosTbSeg[0].MotivoLLamada;
+      this.form.categoriaLlamada = info.registrosTbSeg[0].CategoriaLlamada;
       this.form = {
         ...this.form,
         aceptSenor: info.registrosTbRegTel[0].AceptSenor === 'SI',
@@ -411,12 +433,7 @@ export default {
     isValidDate () {
       setTimeout(() => {
         const date = this.form.fechaSeguimiento ? this.form.fechaSeguimiento.split('/') : [];
-        if (date.length > 2) {
-          const isValid = dayjs(new Date(date[2], date[1], date[0])).isValid();
-          if (!isValid) {
-            this.form.fechaSeguimiento = null;
-          }
-        } else {
+        if (date.length < 2) {
           this.form.fechaSeguimiento = null;
         }
       }, 100);
