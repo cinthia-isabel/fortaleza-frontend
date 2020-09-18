@@ -138,7 +138,7 @@
         <template v-slot:top>
           <div>
             <v-select
-              label="Ir a la página"
+              label="Ir a.."
               outlined
               dense
               hide-details
