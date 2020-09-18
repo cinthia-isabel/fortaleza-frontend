@@ -13,6 +13,14 @@
       <template slot="items" slot-scope="items">
         <tr>
           <td>
+            <v-tooltip bottom color="info lighten-1">
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" @click="showHistory(items)">
+                  <v-icon color="info">list_alt</v-icon>
+                </v-btn>
+              </template>
+              <span>Ver historial</span>
+            </v-tooltip>
             <v-tooltip bottom color="success lighten-1">
               <template v-slot:activator="{ on }">
                 <v-btn icon v-on="on" @click="showForm(items)">
@@ -25,16 +33,10 @@
           <td>{{ items.items.Nombres }}</td>
           <td>{{ items.items.Apellidos }}</td>
           <td>{{ items.items.Ciudad }}</td>
-          <td>{{ items.items.IglesiaCongregacion }}</td>
           <td>{{ items.items.celular }}</td>
           <td>{{ items.items.FechaComp }}</td>
           <td>{{ items.items.HoraComp }}</td>
           <td>{{ items.items.TipoComp }}</td>
-          <td>
-            <v-icon color="primary">
-               {{ items.items.AceptSenor === 'SI' ? 'done' : 'clear'}}
-            </v-icon>
-          </td>
         </tr>
       </template>
     </crud-table>
@@ -131,12 +133,6 @@
                       class="mb-2"
                       dense
                     ></v-textarea>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12" class="mb-2">
-                    <v-btn large block height="30" dense color="primary" @click="historialSeguimiento = true">
-                      <v-icon class="mr-2">timeline</v-icon>
-                      Ver historial del seguimiento
-                    </v-btn>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-textarea
@@ -328,12 +324,10 @@ export default {
       { text: 'Nombres', align: 'center', value: 'Nombres', sortable: true },
       { text: 'Apellidos', align: 'center', value: 'Apellidos' },
       { text: 'Ciudad', align: 'center', value: 'Ciudad' },
-      { text: 'IglesiaCongregacion', align: 'center', value: 'IglesiaCongregacion' },
       { text: 'Celular', align: 'center', value: 'celular' },
       { text: 'Fecha de seguimiento', align: 'center', value: 'FechaComp' },
       { text: 'Hora de seguimiento', align: 'center', value: 'HoraComp' },
       { text: 'Tipo', align: 'center', value: 'Tipo' },
-      { text: 'Acepta al señor', align: 'center', value: 'AcepSenor' },
     ],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
@@ -418,6 +412,13 @@ export default {
 
       await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 1 });
       this.dialog = true;
+    },
+    async showHistory ({ items }) {
+      this.historialSeguimiento = true;
+      this.itemSeleccionado = items;
+      this.form = items;
+      const info = await this.$service.get(`info-seguimiento/${items.id_reg}`);
+      this.aHistorial = info.registrosHistorial;
     },
     /**
      * @function handleSelectDate
