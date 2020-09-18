@@ -10,7 +10,7 @@
       :custom="true"
     >
       <!-- Boton agregar usuarios -->
-      <template slot="buttons" v-if="$storage.getUser().id_rol === 1">
+      <template slot="buttons" v-if="[1, 3].includes($storage.getUser().id_rol)">
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-btn

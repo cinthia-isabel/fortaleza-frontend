@@ -283,6 +283,7 @@
                 <v-expansion-panel
                   v-for="(item,i) in aHistorial"
                   :key="i"
+                  :disabled="$storage.getUser().id_rol !== 3"
                 >
                   <v-expansion-panel-header>{{ item.Fecha_reg }} - {{ item.Nombre }} {{ item.Paterno }} {{ item.Materno }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
