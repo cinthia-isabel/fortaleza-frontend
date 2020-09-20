@@ -447,6 +447,7 @@ export default {
           this.$message.success(response.mensaje);
           this.dialogAsignCall = null;
           this.form = {};
+          this.updateList();
         }
       } else {
         this.$message.error('Faltan campos por llenar');
