@@ -143,10 +143,11 @@
                     <v-textarea
                       v-model="form.motivoLlamada"
                       color="primary"
-                      label="Motivo de la llamada"
+                      label="Motivo de la llamada *"
                       outlined
                       hide-details
                       class="mb-2"
+                      :rules="[val => !!val || 'No puede estar vacio']"
                       dense
                     ></v-textarea>
                   </v-col>

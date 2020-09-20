@@ -127,10 +127,11 @@
                     <v-textarea
                       v-model="form.motivoLlamada"
                       color="primary"
-                      label="Motivo de la llamada"
+                      label="Motivo de la llamada *"
                       outlined
                       hide-details
                       class="mb-2"
+                      :rules="[val => !!val || 'No puede estar vacio']"
                       dense
                     ></v-textarea>
                   </v-col>
@@ -412,6 +413,7 @@ export default {
       this.aHistorial = info.registrosHistorial;
 
       await this.$service.put('estado-usuario', { idUser: this.$storage.getUser().id, libre: 0, conectado: 1 });
+      delete this.form.fechaSeguimiento;
       this.dialog = true;
     },
     async showHistory ({ items }) {
