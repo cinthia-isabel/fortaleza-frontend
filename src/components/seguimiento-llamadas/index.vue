@@ -285,7 +285,7 @@
                   :key="i"
                   :disabled="$storage.getUser().id_rol !== 3"
                 >
-                  <v-expansion-panel-header>{{ item.Fecha_reg }} - {{ item.Nombre }} {{ item.Paterno }} {{ item.Materno }}</v-expansion-panel-header>
+                  <v-expansion-panel-header>{{ item.Fecha_reg }} - {{ item.MotivoLlamada }}</v-expansion-panel-header>
                   <v-expansion-panel-content>
                     {{ item.Seguimiento}}
                   </v-expansion-panel-content>

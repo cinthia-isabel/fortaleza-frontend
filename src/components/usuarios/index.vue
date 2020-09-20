@@ -35,18 +35,19 @@
           <td>{{ items.items.Paterno }} {{ items.items.Materno }}</td>
           <td>{{ items.items.Interno }}</td>
           <td>{{ items.items.Celular }}</td>
+          <td>{{ items.items.WB }}</td>
           <td>{{ items.items.Correo }}</td>
           <td>{{ items.items.Ciudad }}</td>
           <td>
-            <v-tooltip bottom color="info lighten-1">
+            <v-tooltip bottom color="secondary">
               <template v-slot:activator="{ on }">
                 <v-btn icon v-on="on" @click="showForm(items)">
-                  <v-icon color="info">edit</v-icon>
+                  <v-icon color="secondary">edit</v-icon>
                 </v-btn>
               </template>
               <span>Editar usuario</span>
             </v-tooltip>
-            <v-tooltip bottom color="error lighten-1">
+            <v-tooltip bottom color="error">
               <template v-slot:activator="{ on }">
                 <v-btn icon v-on="on" @click="deleteUser(items)">
                   <v-icon color="error">delete_forever</v-icon>
@@ -200,6 +201,7 @@ export default {
       { text: 'Apellidos', align: 'center', value: 'Paterno' },
       { text: 'Interno', align: 'center', value: 'Interno', sortable: true },
       { text: 'Celular', align: 'center', value: 'Celular', sortable: true },
+      { text: 'Número corporativo', align: 'center', value: 'WB', sortable: true },
       { text: 'Correo', align: 'center', value: 'Correo' },
       { text: 'Ciudad', align: 'center', value: 'Ciudad' },
       {

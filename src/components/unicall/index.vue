@@ -28,9 +28,9 @@
       </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
       <template slot="items" slot-scope="items">
-        <tr>
+        <tr :class="items.items.Estado === 'X' ? 'fila-roja' : ''">
           <td>
-            <v-tooltip bottom color="success lighten-1">
+            <v-tooltip bottom color="success">
               <template v-slot:activator="{ on }">
                 <v-btn icon v-on="on" @click="showForm(items)">
                   <v-icon color="success">phone</v-icon>
@@ -38,10 +38,21 @@
               </template>
               <span>Atender llamada</span>
             </v-tooltip>
+            <v-tooltip bottom color="secondary" v-if="[1, 3].includes($storage.getUser().id_rol)">
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on" @click="asignCall(items)">
+                  <v-icon color="secondary">person_search</v-icon>
+                </v-btn>
+              </template>
+              <span>Asignar llamada</span>
+            </v-tooltip>
           </td>
           <td>{{ items.items.Celular }}</td>
           <td>{{ items.items.FechaLlamada }}</td>
           <td>{{ items.items.Tipo }}</td>
+          <td>
+            {{ items.items.Estado === 'P' ? 'Pendiente' : 'Bloqueado' }}
+          </td>
         </tr>
       </template>
     </crud-table>
@@ -336,6 +347,46 @@
           </v-card-text>
         </v-card>
     </v-dialog>
+    <!-- Dialogo Asignar llamada -->
+    <v-dialog v-model="dialogAsignCall" persistent width="450">
+        <v-card>
+          <v-card-title>
+            <span class="headline primary--text">Asignar llamada</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-form ref="formAsignCall" @submit.prevent="sendDataAsignCall">
+                <v-row no-gutters>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-autocomplete
+                      v-model="form.asignar"
+                      label="Asignar a:"
+                      item-text="Nombre"
+                      item-value="id"
+                      return-object
+                      clearable
+                      prepend-icon="account_circle"
+                      :rules="[item => !!item || 'Este campo no puede estar vacio']"
+                      :items="aUsuariosDisponibles"
+                      no-data-text="No existen usuarios"
+                    ></v-autocomplete>
+                  </v-col>
+                  <v-col cols="12">
+                    <small class="red--text">* Todos los campos marcados son requeridos</small>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-card-actions class="mb-0 pb-0">
+                      <v-spacer></v-spacer>
+                      <v-btn text @click="dialogAsignCall = false">Cancelar</v-btn>
+                      <v-btn type="submit" color="primary">Guardar</v-btn>
+                    </v-card-actions>
+                  </v-col>
+                </v-row>
+              </v-form>
+            </v-container>
+          </v-card-text>
+        </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -349,6 +400,8 @@ export default {
     dialog: null,
     mCalendar: null,
     dialogAdd: null,
+    dialogAsignCall: null,
+    aUsuariosDisponibles: [],
     aMotivos: [],
     minDate: undefined,
     maxDate: undefined,
@@ -357,9 +410,10 @@ export default {
     order: ['createdAt', 'DESC'],
     headers: [
       { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
-      { text: 'Celular', align: 'center', value: 'Celular', sortable: true },
-      { text: 'Fecha de la llamada', value: 'FechaLlamada', sortable: true },
-      { text: 'Tipo', align: 'center', value: 'Tipo' },
+      { text: 'Celular', align: 'center', value: 'Celular', sortable: false },
+      { text: 'Fecha de la llamada', value: 'FechaLlamada', sortable: false },
+      { text: 'Tipo', align: 'center', value: 'Tipo', sortable: false },
+      { text: 'Estado', align: 'center', value: 'Estado', sortable: false }
     ],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
@@ -375,12 +429,33 @@ export default {
     clearInterval(this.interval);
   },
   async mounted () {
+    this.aUsuariosDisponibles = await this.$service.get('usuarios-disponibles');
     this.aMotivos = await this.$service.get('motivo-llamada');
     this.interval = setInterval(() => {
       this.updateList();
     }, 60000);
   },
   methods: {
+    async sendDataAsignCall () {
+      if (this.$refs.formAsignCall.validate()) {
+        const data = {
+          interno: this.form.asignar.Interno,
+          idCall: this.item.idCall
+        };
+        const response = await this.$service.post('asignar-llamada', data);
+        if (response.finalizado) {
+          this.$message.success(response.mensaje);
+          this.dialogAsignCall = null;
+          this.form = {};
+        }
+      } else {
+        this.$message.error('Faltan campos por llenar');
+      }
+    },
+    asignCall ({ items }) {
+      this.dialogAsignCall = true;
+      this.item = items;
+    },
     async sendData () {
       try {
         if (this.$refs.form.validate()) {
@@ -498,6 +573,12 @@ export default {
     background: $white;
     div {
       border-radius: 50%;
+    }
+  }
+  .fila-roja {
+    background: lighten($color: $primary, $amount: 60) !important;
+    &:hover {
+      background: lighten($color: $primary, $amount: 60) !important;
     }
   }
 </style>

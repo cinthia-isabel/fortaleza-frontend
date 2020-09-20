@@ -32,7 +32,7 @@ export default {
               icon: 'contact_phone'
             },
           ];
-          if (data.data.user.id_rol === 1) {
+          if ([1, 3].includes(data.data.user.id_rol)) {
             menus = menus.concat([
               {
                 url: 'usuarios',
