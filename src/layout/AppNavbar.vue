@@ -5,7 +5,7 @@
     fixed
     :height="auth ? 40 : 80"
     class="fortaleza--navbar"
-    :class="['app-navbar', !breakpoints.includes($vuetify.breakpoint.name) ? 'break-option' : '']"
+    :class="['app-navbar', !breakpoints.includes($vuetify.breakpoint.name) && !auth ? 'break-option' : '']"
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
