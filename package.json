@@ -94,7 +94,8 @@
       "no-mixed-operators": "off",
       "object-curly-newline": "off",
       "no-unused-expressions": "off",
-      "no-multiple-empty-lines": "off"
+      "no-multiple-empty-lines": "off",
+      "quotes": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

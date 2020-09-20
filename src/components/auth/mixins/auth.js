@@ -81,7 +81,7 @@ export default {
         this.$storage.remove('sidenav');
         this.$storage.remove('permissions');
         this.cleanData(storevuex);
-        router.push('/');
+        if (router.path !== '/') router.push('/');
       } catch (error) {
         this.$message.error(error.message || 'Ocurrio un error a tratar de conectarse con ciudadania digital');
       }

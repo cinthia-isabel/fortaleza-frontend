@@ -32,7 +32,7 @@ export default {
   overflow: hidden !important;
   .app-contactanos__background {
     width: 100%;
-    background: #0F0F0F url('../../../public/img/llamanos.jpeg') no-repeat;
+    background: #0F0F0F url('../../../public/img/Call_center.png') no-repeat;
     position: fixed;
     background-size: contain;
     background-position: center;

@@ -39,6 +39,7 @@ export default {
   height: calc(100vh - 150px);
   margin: auto;
   text-align: center;
+  overflow: auto;
   .app-quienes-somos__background {
     width: 100%;
     background: #0f0f0f;

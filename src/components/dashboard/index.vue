@@ -11,25 +11,31 @@
     >
       <v-carousel-item
         key="1"
-        src="img/llamanos.jpeg"
+        src="img/Bienvenido.png"
         reverse-transition="fade-transition"
         transition="fade-transition"
       ></v-carousel-item>
       <v-carousel-item
         key="2"
-        src="img/espiritu.jpeg"
+        src="img/Contactanos.png"
         reverse-transition="fade-transition"
         transition="fade-transition"
       ></v-carousel-item>
       <v-carousel-item
         key="3"
-        src="img/fuertes.jpeg"
+        src="img/Call_center.png"
         reverse-transition="fade-transition"
         transition="fade-transition"
       ></v-carousel-item>
       <v-carousel-item
-        key="6"
-        src="img/tres-manos.jpeg"
+        key="4"
+        src="img/Arte_espiritu.png"
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      ></v-carousel-item>
+      <v-carousel-item
+        key="5"
+        src="img/Arte_manos.png"
         reverse-transition="fade-transition"
         transition="fade-transition"
       ></v-carousel-item>
@@ -70,7 +76,9 @@ export default {
       this.$storage.remove('permissions');
       this.$store.commit('setAuth', false);
       this.$store.commit('setMain', false);
-      this.$router.push('/');
+      if (this.$route.path !== '/') {
+        this.$router.push('/');
+      }
     });
   }
 };
