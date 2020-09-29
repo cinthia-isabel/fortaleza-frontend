@@ -28,7 +28,7 @@
           outlined
           @click="$router.push('contactanos')"
         >Contáctanos</v-btn>
-        <!-- <v-btn
+        <v-btn
           class="ml-1"
           text
           color="primary"
@@ -48,7 +48,7 @@
           color="primary"
           outlined
           @click="$router.push('entregas')"
-        >Entregas</v-btn> -->
+        >Entregas</v-btn>
         <v-btn
           class="ml-1"
           v-if="!auth"
@@ -93,7 +93,7 @@
           </template>
           <span>Contáctanos</span>
         </v-tooltip>
-        <!-- <v-tooltip bottom color="primary">
+        <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               class="ml-1"
@@ -143,7 +143,7 @@
             </v-btn>
           </template>
           <span>Entregas</span>
-        </v-tooltip> -->
+        </v-tooltip>
         <v-tooltip bottom color="primary" v-if="!auth">
           <template v-slot:activator="{ on, attrs }">
             <v-btn

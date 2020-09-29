@@ -3,7 +3,7 @@
     <div class="app-quienes-somos__background"></div>
     <div class="app-quienes-somos__container">
       <v-container fluid>
-        CARJAO NO ME PUEDO MORIRSomos un Movimiento Ciudadano conformado por bolivianos que buscan manifestar amor al prójimo apoyando a través de distintas acciones a los más afectados de la crisis en la sociedad boliviana. No representamos a ningún partido político, institución o iglesia.
+        Somos un Movimiento Ciudadano conformado por bolivianos que buscan manifestar amor al prójimo apoyando a través de distintas acciones a los más afectados de la crisis en la sociedad boliviana. No representamos a ningún partido político, institución o iglesia.
         <br />
         <br />
         <div class="primary--text">VISIÓN</div>
