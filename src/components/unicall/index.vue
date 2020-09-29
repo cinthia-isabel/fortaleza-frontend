@@ -32,7 +32,7 @@
           <td>
             <v-tooltip bottom color="success">
               <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on" @click="showForm(items)">
+                <v-btn :disabled="items.items.Estado === 'X'" icon v-on="on" @click="showForm(items)">
                   <v-icon color="success">phone</v-icon>
                 </v-btn>
               </template>
@@ -40,7 +40,7 @@
             </v-tooltip>
             <v-tooltip bottom color="secondary" v-if="[1, 3].includes($storage.getUser().id_rol)">
               <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on" @click="asignCall(items)">
+                <v-btn :disabled="items.items.Estado === 'X'" icon v-on="on" @click="asignCall(items)">
                   <v-icon color="secondary">person_search</v-icon>
                 </v-btn>
               </template>
@@ -68,14 +68,29 @@
                 <v-row no-gutters>
                   <v-col cols="12" sm="12" md="12">
                     <v-checkbox
-                      v-model="form.contesto"
+                      v-model="form.noContesta"
                       color="primary"
-                      label="¿Contesto la llamada?"
+                      label="¿No Contesto la llamada?"
+                      outlined
+                      hide-details
+                      @change="marcarNoContesto"
+                      dense
+                      class="mb-2"
+                      required></v-checkbox>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12" v-if="(item.NumeroIntentos || 1) + 1 === 3 && form.noContesta">
+                    <v-textarea
+                      v-model="form.ComentarioNoRespondio"
+                      color="primary"
+                      label="Comentarios"
+                      placeholder="Ingrese las posibles razones por las que no puedo realizar la llamada"
                       outlined
                       hide-details
                       dense
                       class="mb-2"
-                      required></v-checkbox>
+                      :rules="[val => !!val || 'Este campo no puede estar vacio']"
+                      required>
+                    </v-textarea>
                   </v-col>
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field
@@ -85,6 +100,7 @@
                       outlined
                       hide-details
                       dense
+                      :disabled="form.noContesta"
                       class="mb-2"
                       required></v-text-field>
                   </v-col>
@@ -96,6 +112,7 @@
                       outlined
                       hide-details
                       dense
+                      :disabled="form.noContesta"
                       class="mb-2"
                       required></v-text-field>
                   </v-col>
@@ -107,6 +124,7 @@
                       outlined
                       hide-details
                       dense
+                      :disabled="form.noContesta"
                       class="mb-2"
                       required></v-text-field>
                   </v-col>
@@ -118,6 +136,7 @@
                       outlined
                       hide-details
                       dense
+                      :disabled="form.noContesta"
                       class="mb-2"
                       required></v-text-field>
                   </v-col>
@@ -126,7 +145,8 @@
                     <v-radio-group
                       v-model="form.categoriaLlamada"
                       color="primary"
-                      :rules="[val => !!val || 'No puede estar vacio']"
+                      :disabled="form.noContesta"
+                      :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
                     >
                       <v-radio
                         v-for="motivo in aMotivos"
@@ -146,8 +166,9 @@
                       label="Motivo de la llamada *"
                       outlined
                       hide-details
+                      :disabled="form.noContesta"
                       class="mb-2"
-                      :rules="[val => !!val || 'No puede estar vacio']"
+                      :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
                       dense
                     ></v-textarea>
                   </v-col>
@@ -155,9 +176,10 @@
                     <v-textarea
                       label="Notas de seguimiento *"
                       v-model="form.notasSeguimiento"
-                      :rules="[val => !!val || 'El campo no puede estar vacio']"
+                      :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
                       hide-details
                       dense
+                      :disabled="form.noContesta"
                       outlined
                       class="mb-2"
                     ></v-textarea>
@@ -168,6 +190,7 @@
                       color="primary"
                       label="¿Acepta al Señor?"
                       hide-details
+                      :disabled="form.noContesta"
                       dense
                     ></v-switch>
                   </v-col>
@@ -175,7 +198,8 @@
                     <v-radio-group
                       v-model="form.recibirDiosOpcion"
                       color="primary"
-                      :rules="[val => !!val || 'No puede estar vacio']"
+                      :disabled="form.noContesta"
+                      :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
                     >
                       <v-radio
                         label="Ya tiene al señor como su salvador"
@@ -199,6 +223,7 @@
                       color="primary"
                       hide-details
                       class="mb-2"
+                      :disabled="form.noContesta"
                       dense
                       label="¿Quiere que se le contacte nuevamente?"
                     ></v-switch>
@@ -217,6 +242,7 @@
                           v-model="form.fechaSeguimiento"
                           @change="handleSelectDate"
                           @blur="isValidDate"
+                          :disabled="form.noContesta"
                           @keypress.enter.prevent="isValidDate"
                           label="Fecha de seguimiento *"
                           hint="DD/MM/YYYY"
@@ -229,7 +255,7 @@
                           prepend-icon="event"
                           v-on="on"
                           autocomplete="off"
-                          :rules="[val => !!val || 'La fecha no puede estar vacio']"
+                          :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
                         ></v-text-field>
                       </template>
                       <v-date-picker
@@ -250,8 +276,9 @@
                       label="Hora de seguimiento *"
                       placeholder="15:40"
                       outlined
+                      :disabled="form.noContesta"
                       class="ml-2 mb-2"
-                      :rules="[val => !!val || 'El campo no puede estar vacio']"
+                      :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
                       hide-details
                       dense
                       v-model="form.horaSeguimiento"
@@ -259,7 +286,11 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="12" v-if="form.contactame">
                     <h4>Seguimiento: </h4>
-                    <v-radio-group v-model="form.seguimiento" :rules="[val => !!val || 'Este campo no puede estar vacio']">
+                    <v-radio-group
+                      v-model="form.seguimiento"
+                      :disabled="form.noContesta"
+                      :rules="form.noContesta ? [] : [val => !!val || 'No puede estar vacio']"
+                    >
                       <v-radio
                         color="primary"
                         label="Llamada"
@@ -437,6 +468,12 @@ export default {
     }, 60000);
   },
   methods: {
+    marcarNoContesto () {
+      this.form = {
+        ...this.form,
+        ComentarioNoRespondio: null
+      };
+    },
     async sendDataAsignCall () {
       if (this.$refs.formAsignCall.validate()) {
         const data = {
@@ -464,6 +501,7 @@ export default {
           this.$waiting(true, 'Espere unos segundos por favor...');
           const response = await this.$service.post('llamada-finalizada', {
             ...this.form,
+            numeroIntentos: this.item.NumeroIntentos,
             idCall: this.item.idCall,
             interno: this.$storage.getUser().interno,
             celular: this.item.Celular,

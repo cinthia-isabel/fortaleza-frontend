@@ -33,21 +33,21 @@
           text
           color="primary"
           outlined
-          @click="$router.push('contactanos')"
+          @click="$router.push('mensajes-fortaleza')"
         >Mensajes de Fortaleza</v-btn>
         <v-btn
           class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('contactanos')"
+          @click="$router.push('voces-fortaleza')"
         >Voces de Fortaleza</v-btn>
         <v-btn
           class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('contactanos')"
+          @click="$router.push('entregas')"
         >Entregas</v-btn>
         <v-btn
           class="ml-1"
@@ -103,7 +103,7 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('contactanos')"
+              @click="$router.push('mensajes-fortaleza')"
             >
               <v-icon dark>campaign</v-icon>
             </v-btn>
@@ -120,7 +120,7 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('contactanos')"
+              @click="$router.push('voces-fortaleza')"
             >
               <v-icon dark>support_agent</v-icon>
             </v-btn>
@@ -137,7 +137,7 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('contactanos')"
+              @click="$router.push('entregas')"
             >
               <v-icon dark>store</v-icon>
             </v-btn>

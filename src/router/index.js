@@ -30,6 +30,21 @@ const routes = [
     component: () => import(/* webpackChunkName: "contactanos" */ '../components/contactanos'),
   },
   {
+    path: '/mensajes-fortaleza',
+    name: 'mensaje-fortaleza',
+    component: () => import(/* webpackChunkName: "mensaje-fortaleza" */ '../components/mensajes-fortaleza'),
+  },
+  {
+    path: '/voces-fortaleza',
+    name: 'voces-fortaleza',
+    component: () => import(/* webpackChunkName: "voces-fortaleza" */ '../components/voces-fortaleza'),
+  },
+  {
+    path: '/entregas',
+    name: 'entregas',
+    component: () => import(/* webpackChunkName: "entregas" */ '../components/entregas'),
+  },
+  {
     path: '/seguimiento-llamadas',
     name: 'seguimiento-llamadas',
     component: () => import(/* webpackChunkName: "seguimiento-llamadas" */ '../components/seguimiento-llamadas'),
