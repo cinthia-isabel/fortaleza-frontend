@@ -1,6 +1,5 @@
 <template>
   <div class="entregas">
-    <div class="entregas__background"></div>
     <div class="entregas__container">
       <v-container fluid>
         <v-row>
@@ -30,17 +29,17 @@ export default {
   },
   mounted () {
     this.aImages = [{
-      src: 'img/fuertes.jpeg',
+      src: 'http://www.vocesfortaleza.com/assets/entregas/Captura%20de%20pantalla%202020-06-19%20a%20las%2023.12.33.png',
     }, {
-      src: 'img/espiritu.jpeg',
+      src: 'http://www.vocesfortaleza.com/assets/entregas/Captura%20de%20pantalla%202020-06-19%20a%20las%2023.13.41.png',
     }, {
-      src: 'img/Call_center.png'
+      src: 'http://www.vocesfortaleza.com/assets/entregas/Captura%20de%20pantalla%202020-06-19%20a%20las%2023.15.51.png'
     }, {
-      src: 'img/fuertes.jpeg',
+      src: 'http://www.vocesfortaleza.com/assets/entregas/Captura%20de%20pantalla%202020-06-19%20a%20las%2023.33.53.png',
     }, {
-      src: 'img/espiritu.jpeg',
+      src: 'http://www.vocesfortaleza.com/assets/entregas/Captura%20de%20pantalla%202020-06-19%20a%20las%2023.35.02.png',
     }, {
-      src: 'img/Call_center.png'
+      src: 'http://www.vocesfortaleza.com/assets/entregas/Captura%20de%20pantalla%202020-06-19%20a%20las%2023.37.04.png'
     }];
   }
 };
@@ -57,24 +56,13 @@ export default {
   margin: auto;
   text-align: center;
   overflow: auto;
-  .entregas__background {
-    width: 100%;
-    background: #0f0f0f;
-    position: fixed;
-    background-size: cover;
-    background-position: center;
-    top: 80px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-  }
   .entregas__container {
     position: relative;
     margin: auto;
     padding: 0;
     color: $white;
     user-select: none;
+    overflow: auto;
   }
 }
 </style>
