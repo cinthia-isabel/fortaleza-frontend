@@ -51,17 +51,6 @@
               <v-form ref="form" @submit.prevent="sendData">
                 <v-row no-gutters>
                   <v-col cols="12" sm="12" md="12">
-                    <v-checkbox
-                      v-model="form.contesto"
-                      color="primary"
-                      label="¿Contesto la llamada?"
-                      outlined
-                      hide-details
-                      dense
-                      class="mb-2"
-                      required></v-checkbox>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="12">
                     <v-text-field
                       v-model="form.Nombres"
                       color="primary"
