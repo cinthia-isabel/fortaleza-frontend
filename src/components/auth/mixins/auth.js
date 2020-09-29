@@ -35,6 +35,11 @@ export default {
           if ([1, 3].includes(data.data.user.id_rol)) {
             menus = menus.concat([
               {
+                url: 'categorias-llamada',
+                label: 'Categorias llamada',
+                icon: 'list'
+              },
+              {
                 url: 'usuarios',
                 label: 'Usuarios',
                 icon: 'supervised_user_circle'

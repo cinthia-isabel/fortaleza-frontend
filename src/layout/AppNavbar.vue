@@ -9,7 +9,7 @@
     flat
   >
     <v-app-bar-nav-icon v-if="auth" class="btn-mini-variant" @click="handleMiniVariant"></v-app-bar-nav-icon>
-    <v-toolbar-title class="title-fortaleza" @click="$router.push('/')"></v-toolbar-title>
+    <v-toolbar-title class="title-fortaleza" @click="!auth ? $router.push('/') : ''"></v-toolbar-title>
     <v-spacer></v-spacer>
     <!-- Seccion botones -->
     <v-card elevation="0" class="enlaces" v-if="!auth">

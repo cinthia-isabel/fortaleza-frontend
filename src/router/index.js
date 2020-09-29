@@ -55,6 +55,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "usuarios" */ '../components/usuarios'),
   },
   {
+    path: '/categorias-llamada',
+    name: 'categorias-llamada',
+    component: () => import(/* webpackChunkName: "categorias-llamadas" */ '../components/categorias-llamadas'),
+  },
+  {
     path: '/404',
     component: () => import(/* webpackChunkName: "notFound" */ '../layout/AppNotFound.vue'),
   }
