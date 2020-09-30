@@ -18,7 +18,6 @@
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.12",
     "vue-router": "^3.4.3",
-    "vue-stack-grid": "^1.2.1",
     "vuetify": "2.2.1",
     "vuex": "^3.5.1"
   },
