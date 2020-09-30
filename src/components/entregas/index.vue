@@ -12,7 +12,7 @@
         reverse-transition="fade-transition"
         transition="fade-transition"
       >
-        <lightbox :items="item.items" :cells="5" class="entregas"></lightbox>
+        <lightbox :items="item.items" class="entregas"></lightbox>
       </v-carousel-item>
     </v-carousel>
   </div>
