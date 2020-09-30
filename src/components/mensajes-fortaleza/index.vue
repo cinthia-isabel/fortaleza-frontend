@@ -1,5 +1,5 @@
 <template>
-  <div class="app-quienes-somos">
+  <div class="app-mensajes-fortaleza">
     <v-row no-gutters>
       <v-col cols="12" class="d-flex flex-row justify-space-around flex-wrap mt-2">
         <v-card
@@ -37,7 +37,7 @@
                 style="text-transform: none"
                 @click="item.show = !item.show"
               >
-                {{ !item.show ? 'Ver mas...' : 'Ocultar'}}
+                {{ !item.show ? 'Ver más...' : 'Ocultar'}}
               </v-btn>
 
             </v-card-actions>
@@ -142,7 +142,7 @@ export default {
 <style lang="scss">
 @import "../../scss/variables.scss";
 
-.app-quienes-somos {
+.app-mensajes-fortaleza {
   margin: 0;
   padding: 0;
   width: 100%;
