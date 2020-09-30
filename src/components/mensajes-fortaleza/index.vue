@@ -69,58 +69,70 @@ export default {
   mounted () {
     this.aMensajes = [
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'ESCOGE TUS ALIMENTOS',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Arte%20frase.png',
         descripcion: 'La calidad de lo que consumimos se refleja en nuestra salud, en nuestro cuerpo. Lo mismo sucede en el interior, la elección que tomamos para nutrir nuestro espíritu es un alimento que se ve reflejado en las acciones cotidianas. Asegúrate de buscar luz, recuerda que lo que consumas será lo que tendrás para ofrecer a los demás, nadie puede dar lo que no tiene. El amor nutre, servir a otros trae significado de vida, tener fe, elegir con prudencia nuestras acciones, pensamientos y nutrir nuestro espíritu buscando palabras de sabiduría, trae bendición. Muchas puertas esperan ser abiertas por tus manos para derramar sobre ti abundancia y felicidad, si quieres encontrar la llave, asegúrate de elegir correctamente el alimento de tu espíritu, esa elección abrirá tus ojos para mostrarte un camino.'
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'LIMPIA TU EMISION',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-06-27%20a%20las%2014.00.42.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'Todo lo que hablamos tiene valor. La intención y el significado de las palabras cargan energías. Imagina las veces que te hicieron un cumplido, las veces que dijiste “te quiero” o las veces que escuchaste gritos acompañados de insultos, todas esas palabras causaron impacto en el ambiente. Si quieres rodearte de bendiciones debes asegurarte de no emitir malas energías a tu entorno. Todos somos emisores en este mundo y ese es un poder inmenso para nuestras vidas y las de los que nos rodean. Intenta limpiar tu emisión, hablar palabras de amor, perdón y bondad, evitando las negativas. Verás que puedes cambiar la atmósfera. '
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'ALIMENTA AL GUERRERO',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-07-23%20a%20las%2020.29.54.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'En ti habitan dos personajes, el guerrero y la victima, ambos están a tu disposición, tu decides quien será protagonista y cuando uno haya tomado el mando, el otro morirá. Cotidianamente enfrentamos situaciones retadoras, cuando creemos haber superado lo más difícil, llega algo aún mayor. La buena noticia es que nunca tendremos que enfrentar aquello para lo cuál no estamos preparados. Cada batalla nos hace más fuertes, más grandes, más sabios.  Imagina a personas entrenando en un gimnasio, aquél que puede alzar mucho peso es porque estuvo preparándose para hacerlo, seguramente le costó mucho esfuerzo y dedicación llegar ahí y no podrá alzar más del peso que le corresponde, pero mientras más se prepare, más fuertes serán sus músculos; lo mismo sucede en nuestra vida, nadie dijo que sería fácil, pero siempre valdrá la pena luchar. La victima que vive en ti estará disponible en todo momento para tomar las riendas de tu vida, pero ¿sabes qué?, no viniste al mundo a perder, es hora de levantarte, despertar y alimentar al guerrero, salir con valentía a afrontar cualquier situación, con amor, perdón y paciencia no habrá nada que pueda vencerte, no temas, en tu corazón hay fortaleza.'
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'NO CARGUES LO QUE NO TE PERTENECE',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-07-25%20a%20las%2022.18.09.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'El pasado, la culpa, el rencor, los problemas del entorno y todas aquellas cosas que no están bajo nuestro control pueden convertirse en una carga muy pesada para nosotros. Enfoquémonos en lo que si podemos controlar, es decir, en nuestras reacciones ante las dificultades de la vida, nuestros pensamientos y nuestras intenciones, teniendo en mente que no vinimos a resolverlo todo, de esta manera podremos soltar la carga que no nos pertenece. Esto no quiere decir ser inconscientes o insensibles, por el contrario, quiere decir hacer todo lo que está en nuestras manos para generar paz y aportar a las soluciones de los problemas, pero no frustrarnos por las cosas que no están bajo nuestro control. Es muy importante soltar la idea de querer controlarlo todo, soltar el pasado, soltar el rencor y la culpa, todas esas son cargas que no nos pertenecen. La vida no es perfecta para nadie, apreciemos lo bueno e impulsemos al amor y al perdón a multiplicarse, porque ellos pueden convertir situaciones negativas en lecciones llenas de riqueza. '
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'REESCRIBELO',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-07-28%20a%20las%2017.05.13.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'El pasado, la culpa, el rencor, los problemas del entorno y todas aquellas cosas que no están bajo nuestro control pueden convertirse en una carga muy pesada para nosotros. Enfoquémonos en lo que si podemos controlar, es decir, en nuestras reacciones ante las dificultades de la vida, nuestros pensamientos y nuestras intenciones, teniendo en mente que no vinimos a resolverlo todo, de esta manera podremos soltar la carga que no nos pertenece. Esto no quiere decir ser inconscientes o insensibles, por el contrario, quiere decir hacer todo lo que está en nuestras manos para generar paz y aportar a las soluciones de los problemas, pero no frustrarnos por las cosas que no están bajo nuestro control. Es muy importante soltar la idea de querer controlarlo todo, soltar el pasado, soltar el rencor y la culpa, todas esas son cargas que no nos pertenecen. La vida no es perfecta para nadie, apreciemos lo bueno e impulsemos al amor y al perdón a multiplicarse, porque ellos pueden convertir situaciones negativas en lecciones llenas de riqueza. '
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'ENFOCA MANUALMENTE',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-07-28%20a%20las%2022.50.44.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'Enfoca tu visión en aquello que debe relucir, lo que merece ser apreciado. El panorama incluye muchos elementos, al tomar una fotografía, tú decides cuál debe ser protagonista. Cada situación carga un propósito, incluso en los lugares más oscuros podrás encontrar aliento si elevas la mirada y abres los ojos, la luz alumbra desde arriba y pararte debajo de ella te dará calor en el invierno.'
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'NO GUARDES LA BASURA',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-08-03%20a%20las%2018.24.13.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'La contaminación y suciedad son un impedimento para el bienestar, la limpieza nos permite mantener la sanidad. La frustración, el dolor y la decepción generan un fuerte impacto en nuestro interior, por eso es necesario limpiar cada rincón que fue contaminado en nuestro corazón, para evitar la presencia de residuos. El rencor ensucia, el perdón limpia, y cuidarnos implica mantenernos limpios. Ya es momento de soltar el enojo, la rabia y el resentimiento. No guardes basura en tu corazón, de ahí emana la vida.'
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'TU TIENES LA LLAVE DE MUCHAS PUERTAS',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/Captura%20de%20pantalla%202020-08-06%20a%20las%2018.23.18.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'Somos los dueños; solo hace falta un poco de intención y voluntad para que cualquier cosa (positiva o negativa) empiece a tomar espacio en nuestra mente y alma. Algunas veces el acto es casi automático, sin embargo, cuando tomamos conciencia de este poder y entendemos un poco de la gran capacidad que poseemos, habilitamos la inmensa posibilidad de decidir, cotidianamente, las puertas que deseamos abrir. Puedes abrirle la puerta al miedo y verás que rápidamente se llenará tu espacio de amenaza, debilidad y angustia. También, puedes abrirle la puerta al amor, a la fe, a la valentía y verás que fácilmente se multiplican tus fuerzas, para caminar con firmeza.  Eres muy poderoso, donde pongas tus ojos abrirás puertas. Toma conciencia de aquello y decide con responsabilidad, llénate de vida y esperanza, abre tu corazón y deja que entre la luz.'
       },
       {
-        title: 'La calidad de lo que consumimos se refleja en nuestra salud',
+        title: 'PENSAR EN EL OTRO NOS HACE MAS FUERTES',
         show: false,
         src: 'http://www.vocesfortaleza.com/assets/mensajes/arte%20alimentos.png',
-        descripcion: 'Im a thing. But, like most politicians, he promised more than he could deliver. '
+        descripcion: 'Los seres humanos tenemos la maravillosa capacidad de cobrar fuerzas cuando nos atrevemos a apoyar a otro. Ayudando a otra persona (de cualquier manera posible) descubrimos la tremenda fuerza que habita en nuestro interior, estamos diseñados para vivir en comunidad y cuando ayudamos a solucionar los problemas del otro se hace mucho más fácil solucionar los nuestros. El amor se multiplica, todos los días tienes una oportunidad de darle la mano a otro para generar esa multiplicación, inténtalo.'
+      },
+      {
+        title: 'TU ESPIRITU PUEDE FORTALECERTE ANTE CUALQUIER AMENAZA',
+        show: false,
+        src: 'http://www.vocesfortaleza.com/assets/mensajes/arte%20cargar.png',
+        descripcion: 'Cuando enfrentamos cualquier tipo de situación debemos tomar decisiones, éstas son analizadas en nuestro interior y algo nos impulsa a tomarlas. Si nos detenemos a escuchar y dejamos que ese impulso sea provocado por nuestro espíritu, podemos ser fortalecidos ante cualquier amenaza. Todo lo que vemos es una consecuencia de lo que no podemos ver, las cosas más valiosas y poderosas son invisibles al ojo humano. Hoy ten fe, nada carece de propósito y todo es posible en amor.'
+      },
+      {
+        title: 'HAY VARIOS PARTIDOS Y VARIAS CREENCIAS PERO SOLO APOYARNOS SIN DISTINCION NOS DA FORTALEZ',
+        show: false,
+        src: 'http://www.vocesfortaleza.com/assets/mensajes/arte%20guerrero.png',
+        descripcion: 'Si nuestros ojos están fijados en las diferencias que tenemos se hará difícil el triunfo, pesada la carga y largo el camino. Cotidianamente tenemos la opción de elegir, hoy podemos enfocar nuestra atención y energía en todo aquello que nos une, lo que nos hace hermanos. Sujetados de la mano aunque no pensemos todos de la misma manera y dejando lo que nos separa a un lado para apoyarnos en la carrera, haremos nuestra carga ligera y le daremos sentido a la palabra “fortaleza”.'
       },
     ];
   }

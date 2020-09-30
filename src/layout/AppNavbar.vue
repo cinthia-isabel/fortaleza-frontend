@@ -15,39 +15,39 @@
     <v-card elevation="0" class="enlaces" v-if="!auth">
       <template v-if="breakpoints.includes($vuetify.breakpoint.name)">
         <v-btn
-          class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('quienes-somos')"
+          :class="['ml-1', menuActivo === 'quienes-somos' ? 'activado': '']"
+          @click="pushRouter('quienes-somos')"
         >¿ Quienes Somos ?</v-btn>
         <v-btn
-          class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('contactanos')"
+          :class="['ml-1', menuActivo === 'contactanos' ? 'activado': '']"
+          @click="pushRouter('contactanos')"
         >Contáctanos</v-btn>
         <v-btn
-          class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('mensajes-fortaleza')"
+          :class="['ml-1', menuActivo === 'mensajes-fortaleza' ? 'activado': '']"
+          @click="pushRouter('mensajes-fortaleza')"
         >Mensajes de Fortaleza</v-btn>
         <v-btn
-          class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('voces-fortaleza')"
+          :class="['ml-1', menuActivo === 'voces-fortaleza' ? 'activado': '']"
+          @click="pushRouter('voces-fortaleza')"
         >Voces de Fortaleza</v-btn>
         <v-btn
-          class="ml-1"
           text
           color="primary"
           outlined
-          @click="$router.push('entregas')"
+          :class="['ml-1', menuActivo === 'entregas' ? 'activado': '']"
+          @click="pushRouter('entregas')"
         >Entregas</v-btn>
         <v-btn
           class="ml-1"
@@ -55,21 +55,22 @@
           text
           color="primary"
           outlined
-          @click.native="$router.push('login')"
+          :class="['ml-1', menuActivo === 'login' ? 'activado': '']"
+          @click="pushRouter('login')"
         >Ingresar</v-btn>
       </template>
       <template v-else>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="ml-1"
               icon
               text
               color="primary"
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('quienes-somos')"
+              :class="['ml-1', menuActivo === 'quienes-somos' ? 'activado': '']"
+              @click="pushRouter('quienes-somos')"
             >
               <v-icon dark>account_circle</v-icon>
             </v-btn>
@@ -79,14 +80,14 @@
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="ml-1"
               icon
               text
               color="primary"
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('contactanos')"
+              :class="['ml-1', menuActivo === 'contactanos' ? 'activado': '']"
+              @click="pushRouter('contactanos')"
             >
               <v-icon dark>account_balance</v-icon>
             </v-btn>
@@ -103,7 +104,8 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('mensajes-fortaleza')"
+               :class="['ml-1', menuActivo === 'mensajes-fortaleza' ? 'activado': '']"
+              @click="pushRouter('mensajes-fortaleza')"
             >
               <v-icon dark>campaign</v-icon>
             </v-btn>
@@ -113,14 +115,14 @@
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="ml-1"
               icon
               text
               color="primary"
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('voces-fortaleza')"
+              :class="['ml-1', menuActivo === 'voces-fortaleza' ? 'activado': '']"
+              @click="pushRouter('voces-fortaleza')"
             >
               <v-icon dark>support_agent</v-icon>
             </v-btn>
@@ -130,14 +132,14 @@
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="ml-1"
               icon
               text
               color="primary"
               outlined
               v-bind="attrs"
               v-on="on"
-              @click="$router.push('entregas')"
+              :class="['ml-1', menuActivo === 'entregas' ? 'activado': '']"
+              @click="pushRouter('entregas')"
             >
               <v-icon dark>store</v-icon>
             </v-btn>
@@ -154,7 +156,8 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              @click.native="$router.push('login')"
+              :class="['ml-1', menuActivo === 'login' ? 'activado': '']"
+              @click="pushRouter('login')"
             >
               <v-icon dark>security</v-icon>
             </v-btn>
@@ -177,6 +180,10 @@ export default {
     breakpoints: ["md", "lg", "xl"],
   }),
   methods: {
+    pushRouter (ruta) {
+      this.$store.commit('setMenuActivo', ruta);
+      this.$router.push(ruta);
+    },
     handleMiniVariant() {
       this.$store.commit("layout/toggleMiniVariant");
       this.$store.commit("layout/toggleExpandOnHover");
@@ -194,7 +201,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["auth"]),
+    ...mapState(["auth", "menuActivo"]),
   },
 };
 </script>
@@ -222,6 +229,12 @@ $bgNabvar: rgba(
   }
   .btn-drawer {
     display: none;
+  }
+  .activado {
+    background: $primary;
+    span {
+      color: $white !important;
+    }
   }
 }
 

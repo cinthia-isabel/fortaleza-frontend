@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     main: true,
     auth: false,
+    menuActivo: '',
     menu: {},
     user: {},
     notifications: {
@@ -23,13 +24,6 @@ export default new Vuex.Store({
     navbar: false,
     state403: false,
     modal: false,
-    modal2: false,
-    modal3: false,
-    modal4: false,
-    modal5: false,
-    modal6: false,
-    modal7: false,
-    modal8: false,
     action: null,
     selected: null,
     alert: {
@@ -57,6 +51,9 @@ export default new Vuex.Store({
     setActive(state, value) {
       state.sidenav = value;
       state.navbar = value;
+    },
+    setMenuActivo(state, value) {
+      state.menuActivo = value;
     },
     setMain(state, value) {
       state.main = value;
@@ -123,13 +120,6 @@ export default new Vuex.Store({
       state.permissions = {};
       state.layout.breadcrumbs = {};
       state.modal = false;
-      state.modal2 = false;
-      state.modal3 = false;
-      state.modal4 = false;
-      state.modal5 = false;
-      state.modal6 = false;
-      state.modal7 = false;
-      state.modal8 = false;
       state.state403 = false;
       state.alert.show = false;
       state.confirm.show = false;
