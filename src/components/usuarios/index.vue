@@ -241,7 +241,7 @@ export default {
     },
   },
   methods: {
-    getRol ({items}) {
+    getRol ({ items }) {
       let rolName;
       const rol = this.aRoles.find(elem => elem.id === items.id_rol);
       if (rol) {
@@ -334,7 +334,7 @@ export default {
   mounted () {
     this.$nextTick(async() => {
       this.aRoles = await this.$service.get('roles');
-    })
+    });
   }
 };
 </script>

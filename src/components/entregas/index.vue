@@ -5,6 +5,8 @@
       hide-delimiter-background
       show-arrows-on-hover
       hide-delimiters
+      cycle
+      :interval="10000"
      >
       <v-carousel-item
         v-for="(item,i) in aImages"
@@ -19,8 +21,9 @@
 </template>
 
 <script>
-import lightbox from '../../plugins/@morioh/v-lightbox/src/lightbox';
-import '../../plugins/@morioh/v-lightbox/dist/lightbox.css';
+import lightbox from '../../plugins/@morioh/v-lightbox/src/lightbox.vue';
+import '../../plugins/@morioh/v-lightbox/src/lightbox.css';
+
 export default {
   data() {
     return {

@@ -46,15 +46,17 @@ export default {
               }
             ]);
           }
-          menus = menus.concat([{
+          menus = menus.concat([
+            {
               url: 'cuenta',
               label: 'Cuenta',
               icon: 'security'
-            },{
+            }, {
               url: 'logout',
               label: 'Cerrar sesión',
               icon: 'power_settings_new'
-          }]);
+            }
+          ]);
           this.$storage.set('menu', menus);
           this.$router.push('/llamadas');
           this.$nextTick(() => {
