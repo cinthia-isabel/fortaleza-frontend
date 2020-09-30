@@ -73,7 +73,10 @@
                 events: []
             }
         },
-
+        mounted () {
+            this.$waiting(true, 'Obteniendo imagenes, espere unos segundos por favor...');
+            setTimeout(() => this.$waiting(false), 1000);
+        },
         methods: {
 
 
