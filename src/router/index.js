@@ -65,6 +65,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "categorias-llamadas" */ '../components/categorias-llamadas'),
   },
   {
+    path: '/numeros-bloqueados',
+    name: 'numeros-bloqueados',
+    component: () => import(/* webpackChunkName: "numeros-bloqueados" */ '../components/numeros-bloqueados'),
+  },
+  {
     path: '/404',
     component: () => import(/* webpackChunkName: "notFound" */ '../layout/AppNotFound.vue'),
   }

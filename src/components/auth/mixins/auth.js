@@ -43,6 +43,11 @@ export default {
                 url: 'usuarios',
                 label: 'Usuarios',
                 icon: 'supervised_user_circle'
+              },
+              {
+                url: 'numeros-bloqueados',
+                label: 'Números bloqueados',
+                icon: 'phonelink_erase'
               }
             ]);
           }
