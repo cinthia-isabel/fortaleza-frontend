@@ -48,6 +48,11 @@ export default {
                 url: 'numeros-bloqueados',
                 label: 'Números bloqueados',
                 icon: 'phonelink_erase'
+              },
+              {
+                url: 'reportes',
+                label: 'Reportes',
+                icon: 'pie_chart'
               }
             ]);
           }

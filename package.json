@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.35",
     "moment": "^2.27.0",
@@ -95,7 +96,8 @@
       "object-curly-newline": "off",
       "no-unused-expressions": "off",
       "no-multiple-empty-lines": "off",
-      "quotes": "off"
+      "quotes": "off",
+      "no-new": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
