@@ -167,7 +167,7 @@ export default {
             });
           }
           if (response.finalizado) {
-            this.$message.success('Registro exitosamente actualizado');
+            this.$message.success(response.mensaje || 'Registro exitosamente actualizado');
           } else {
             this.$message.error(response.mensaje);
           }
