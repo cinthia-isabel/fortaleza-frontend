@@ -498,6 +498,11 @@ export default {
     async sendData () {
       try {
         if (this.$refs.form.validate()) {
+          const rg = new RegExp(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/);
+          if (!rg.test(this.form.horaSeguimiento)) {
+            this.$message.error('Formato incorrecto de la hora de seguimiento, tiene que ser por ejemplo: 15:00');
+            return;
+          }
           this.$waiting(true, 'Espere unos segundos por favor...');
           const response = await this.$service.post('llamada-finalizada', {
             ...this.form,
