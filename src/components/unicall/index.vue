@@ -499,7 +499,7 @@ export default {
       try {
         if (this.$refs.form.validate()) {
           const rg = new RegExp(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/);
-          if (!rg.test(this.form.horaSeguimiento)) {
+          if (this.form.horaSeguimiento && !rg.test(this.form.horaSeguimiento)) {
             this.$message.error('Formato incorrecto de la hora de seguimiento, tiene que ser por ejemplo: 15:00');
             return;
           }
