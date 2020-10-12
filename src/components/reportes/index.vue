@@ -84,93 +84,65 @@
           </v-date-picker>
         </v-menu>
       </v-col>
-      <v-col cols="12" class="text-center">
-        <v-tooltip bottom color="primary">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              v-on="on"
-              outlined
-              color="primary"
-              class="mt-2 mb-2"
-              @click="viewReports"
-            >
-              <v-icon color="primary" class="mr-3">
-                pie_chart
-              </v-icon>
-              Generar reportes con filtro de fecha inicio y fin
-            </v-btn>
-          </template>
-          <span>Selecciona la fecha inicio y la fecha fin para ver los reportes</span>
-        </v-tooltip>
-      </v-col>
     </v-row>
-    <v-row no-gutters>
-      <v-col cols="6" xs="12">
-         <v-skeleton-loader
-            :loading="loading"
-            class="ml-2"
-            transition="fade-transition"
-            type="image"
+    <v-tabs
+      v-model="tabs"
+      background-color="transparent"
+    >
+      <v-tab
+       v-for="(item, index) in items"
+       :key="index"
+      >
+        <v-icon class="mr-1">{{ item.icon }}</v-icon>
+        {{ item.titulo }}
+      </v-tab>
+      <v-tabs-items v-model="tabs">
+        <v-tab-item>
+          <canvas id="reporte-dia" width="500" height="200"></canvas>
+        </v-tab-item>
+        <v-tab-item>
+          <canvas id="reporte-mes" width="500" height="200"></canvas>
+        </v-tab-item>
+        <v-tab-item >
+          <canvas id="estados" width="500" height="200"></canvas>
+        </v-tab-item>
+        <v-tab-item>
+          <canvas id="tipo-categorias" width="500" height="200"></canvas>
+        </v-tab-item>
+        <v-tab-item>
+          <crud-table
+            :headers="headers"
+            :url="url"
+            :filters="[]"
+            :widthModal="750"
+            :order="order"
+            :custom="true"
           >
-            <canvas id="hora-dia" width="500" height="200"></canvas>
-         </v-skeleton-loader>
-      </v-col>
-      <v-col cols="6" xs="12">
-        <v-skeleton-loader
-            :loading="loading"
-            class="ml-2"
-            transition="fade-transition"
-            type="image"
-          >
-            <canvas id="estados" width="500" height="200"></canvas>
-         </v-skeleton-loader>
-      </v-col>
-      <v-col cols="6" xs="12">
-        <v-skeleton-loader
-            :loading="loading"
-            class="ml-2 mt-2"
-            transition="fade-transition"
-            type="image"
-          >
-            <canvas id="tipo-registros" width="500" height="200"></canvas>
-         </v-skeleton-loader>
-      </v-col>
-      <v-col cols="6" xs="12">
-        <v-skeleton-loader
-            :loading="loading"
-            class="ml-2 mt-2"
-            transition="fade-transition"
-            type="image"
-          >
-            <canvas id="tipo-llamadas" width="500" height="200"></canvas>
-         </v-skeleton-loader>
-      </v-col>
-      <v-col cols="6" xs="12">
-        <v-skeleton-loader
-            :loading="loading"
-            class="ml-2 mt-2"
-            transition="fade-transition"
-            type="image"
-          >
-            <canvas id="tipo-categorias" width="500" height="200"></canvas>
-         </v-skeleton-loader>
-      </v-col>
-      <v-col cols="6" xs="12">
-        <v-skeleton-loader
-            :loading="loading"
-            class="ml-2 mt-2"
-            transition="fade-transition"
-            type="image"
-          >
-            <canvas id="reporte-usuarios" width="500" height="200"></canvas>
-         </v-skeleton-loader>
-      </v-col>
-    </v-row>
+            <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
+            <template slot="items" slot-scope="items">
+              <tr>
+                <td>{{ items.items.Nombre }}</td>
+                <td>{{ items.items.TOTALES }}</td>
+              </tr>
+            </template>
+          </crud-table>
+        </v-tab-item>
+        <v-tab-item>
+          <canvas id="horario" width="500" height="200"></canvas>
+        </v-tab-item>
+        <v-tab-item>
+          <canvas id="origen-llamada" width="500" height="200"></canvas>
+        </v-tab-item>
+        <v-tab-item>
+          <canvas id="tipo-contacto" width="500" height="200"></canvas>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-tabs>
   </v-card>
 </template>
 <script>
 import Chart from 'chart.js';
+import CrudTable from '@/plugins/crud-table/CrudTable.vue';
 
 export default {
   data: () => ({
@@ -181,9 +153,25 @@ export default {
     fechaInicio: null,
     fechaFin: null,
     fechaInicioMin: null,
-    loading: true
+    items: [],
+    tabs: null,
+    url: 'reporte-usuarios',
+    order: ['createdAt', 'DESC'],
+    headers: [
+      { text: 'Nombres', align: 'center', value: 'NOMBRE' },
+      { text: 'Cantidad', align: 'center', value: 'TOTAL' },
+    ]
   }),
-   watch: {
+  watch: {
+    async tabs (value) {
+      if (value === 0) await this.reporteDia();
+      if (value === 1) await this.reporteMes();
+      if (value === 2) await this.reporteEstados();
+      if (value === 3) await this.reporteTipoCategorias();
+      if (value === 5) await this.reporteHorario();
+      if (value === 6) await this.reporteOrigenLlamada();
+      if (value === 7) await this.reporteTipoContacto();
+    },
     mCalendarInicio (date) {
       this.fechaInicio = this.formatDate(date);
       this.fechaInicioMin = date;
@@ -193,19 +181,6 @@ export default {
     }
   },
   methods: {
-    async viewReports () {
-      if (this.fechaInicio && this.fechaFin) {
-        this.loading = true;
-        await this.reporteHoraDia();
-        await this.reporteEstados();
-        await this.reporteTipoRegistros();
-        await this.reporteTipoLlamadas();
-        await this.reporteTipoCategorias();
-        await this.reporteUsuarios();
-      } else {
-        this.$message.error('Por favor seleccione la fecha inicio y la fecha fin');
-      }
-    },
     /**
      * @function formatDate
      * @description Funcion para formatear fechas
@@ -228,6 +203,15 @@ export default {
      */
     handleSelectDate () {
       this.isValidDate();
+      setTimeout(async() => {
+        if (this.tabs === 0) await this.reporteDia();
+        if (this.tabs === 1) await this.reporteMes();
+        if (this.tabs === 2) await this.reporteEstados();
+        if (this.tabs === 3) await this.reporteTipoCategorias();
+        if (this.tabs === 5) await this.reporteHorario();
+        if (this.tabs === 6) await this.reporteOrigenLlamada();
+        if (this.tabs === 7) await this.reporteTipoContacto();
+      }, 200);
     },
     /**
      * @function isValidDate
@@ -241,17 +225,16 @@ export default {
         }
       }, 100);
     },
-    async reporteHoraDia () {
+    async reporteHorario () {
       try {
-        const response = await this.$service.post('hora-dia', {
+        const response = await this.$service.post('horario', {
           fechaInicio: this.fechaInicio,
           fechaFin: this.fechaFin
         });
-        this.loading = false;
         const labels = response.map(estado => estado.HORA_DIA);
         const data = response.map(total => total.TOTALES);
         setTimeout(() => {
-          new Chart(document.getElementById('hora-dia'), {
+          new Chart(document.getElementById('horario'), {
             type: 'bar',
             data: {
               labels,
@@ -270,13 +253,68 @@ export default {
         this.$message.error(error.message);
       }
     },
+    async reporteMes () {
+      try {
+        const response = await this.$service.post('reporte-mes', {
+          fechaInicio: this.fechaInicio,
+          fechaFin: this.fechaFin
+        });
+        const labels = response.map(estado => estado.DIA);
+        const data = response.map(total => total.TOTALES);
+        setTimeout(() => {
+          new Chart(document.getElementById('reporte-mes'), {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: 'Reporte por mes',
+                  borderColor: 'rgba(154, 17, 38, 0.5)',
+                  backgroundColor: 'rgba(154, 17, 38, 0.1)',
+                  data
+                }
+              ]
+            }
+          });
+        }, 100);
+      } catch (error) {
+        this.$message.error(error.message);
+      }
+    },
+    async reporteDia () {
+      try {
+        const response = await this.$service.post('reporte-dia', {
+          fechaInicio: this.fechaInicio,
+          fechaFin: this.fechaFin
+        });
+        const labels = response.map(estado => estado.HORA);
+        const data = response.map(total => total.TOTALES);
+        setTimeout(() => {
+          new Chart(document.getElementById('reporte-dia'), {
+            type: 'line',
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: 'Reporte por dia',
+                  borderColor: 'rgba(154, 17, 38, 0.5)',
+                  backgroundColor: 'rgba(154, 17, 38, 0.1)',
+                  data
+                }
+              ]
+            }
+          });
+        }, 100);
+      } catch (error) {
+        this.$message.error(error.message);
+      }
+    },
     async reporteEstados () {
       try {
         const response = await this.$service.post('estados', {
           fechaInicio: this.fechaInicio,
           fechaFin: this.fechaFin
         });
-        this.loading = false;
         const labels = response.map(estado => estado.ESTADOS);
         const data = response.map(total => total.TOTALES);
         setTimeout(() => {
@@ -299,17 +337,16 @@ export default {
         this.$message.error(error.message);
       }
     },
-    async reporteTipoRegistros () {
+    async reporteOrigenLlamada () {
       try {
-        const response = await this.$service.post('tipo-registros', {
+        const response = await this.$service.post('origen-llamada', {
           fechaInicio: this.fechaInicio,
           fechaFin: this.fechaFin
         });
-        this.loading = false;
         const labels = response.map(estado => estado.TIPO_REGISTRO);
         const data = response.map(total => total.TOTALES);
         setTimeout(() => {
-          new Chart(document.getElementById('tipo-registros'), {
+          new Chart(document.getElementById('origen-llamada'), {
             type: 'pie',
             data: {
               labels,
@@ -328,17 +365,16 @@ export default {
         this.$message.error(error.message);
       }
     },
-    async reporteTipoLlamadas () {
+    async reporteTipoContacto () {
       try {
-        const response = await this.$service.post('tipo-llamadas', {
+        const response = await this.$service.post('tipo-contacto', {
           fechaInicio: this.fechaInicio,
           fechaFin: this.fechaFin
         });
-        this.loading = false;
         const labels = response.map(estado => estado.TIPO_LLAMADA);
         const data = response.map(total => total.TOTALES);
         setTimeout(() => {
-          new Chart(document.getElementById('tipo-llamadas'), {
+          new Chart(document.getElementById('tipo-contacto'), {
             type: 'pie',
             data: {
               labels,
@@ -363,7 +399,6 @@ export default {
           fechaInicio: this.fechaInicio,
           fechaFin: this.fechaFin
         });
-        this.loading = false;
         const labels = response.map(estado => estado.CATEGORIA);
         const data = response.map(total => total.TOTALES);
         setTimeout(() => {
@@ -386,47 +421,50 @@ export default {
         this.$message.error(error.message);
       }
     },
-    async reporteUsuarios () {
-      try {
-        const response = await this.$service.post('reporte-usuarios', {
-          fechaInicio: this.fechaInicio,
-          fechaFin: this.fechaFin
-        });
-        this.loading = false;
-        const labels = response.map(estado => estado.Nombre);
-        const data = response.map(total => total.TOTALES);
-        setTimeout(() => {
-          new Chart(document.getElementById('reporte-usuarios'), {
-            type: 'pie',
-            data: {
-              labels,
-              datasets: [
-                {
-                  label: 'Tipo de categorias',
-                  borderColor: 'rgba(154, 17, 38, 0.5)',
-                  backgroundColor: 'rgba(154, 17, 38, 0.1)',
-                  data
-                }
-              ]
-            }
-          });
-        }, 100);
-      } catch (error) {
-        this.$message.error(error.message);
-      }
+    tabsHeaders () {
+      this.items = [
+        {
+          titulo: 'Por dia',
+          icon: 'phone'
+        }, {
+          titulo: 'Por mes',
+          icon: 'phone'
+        }, {
+          titulo: 'Por estado',
+          icon: 'phone'
+        }, {
+          titulo: 'Por categoria',
+          icon: 'phone'
+        }, {
+          titulo: 'Por operador',
+          icon: 'phone'
+        }, {
+          titulo: 'Por horario',
+          icon: 'phone'
+        }, {
+          titulo: 'Por origen',
+          icon: 'phone'
+        }, {
+          titulo: 'Por tipo contacto',
+          icon: 'phone'
+        }
+      ];
     }
   },
   components: {
+    CrudTable
   },
   mounted () {
     this.$nextTick(async () => {
-      this.loading = false;
-      await this.reporteHoraDia();
-      await this.reporteEstados();
-      await this.reporteTipoRegistros();
-      await this.reporteTipoLlamadas();
-      await this.reporteTipoCategorias();
-      await this.reporteUsuarios();
+      const anio = new Date().getFullYear();
+      let mes = new Date().getMonth();
+      let day = new Date().getDate();
+      if (mes < 10) mes += 1;
+      if (day < 10) day = `0${day}`;
+      this.fechaInicio = `${day}/${mes}/${anio}`;
+      this.fechaFin = `${day}/${mes}/${anio}`;
+      this.tabsHeaders();
+      this.tabs = 0;
     });
   }
 };
