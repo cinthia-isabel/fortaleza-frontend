@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.756cd01324f7eefa68a67a59abef3e61.js"
+  "/fortaleza-frontend/precache-manifest.61b9500cbb01fe9779625097db8c16f7.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "frontend-base-vue"});
