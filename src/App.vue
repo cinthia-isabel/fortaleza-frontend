@@ -4,6 +4,9 @@
     <app-navbar></app-navbar>
     <v-content>
       <div class="main">
+        <div class="bot-whatsapp">
+          <v-img src="img/whatsapp.png" @click="chatWhatsapp" height="50" width="50"/>
+        </div>
         <transition :name="transitionName" mode="out-in">
           <router-view/>
         </transition>
@@ -71,7 +74,11 @@ export default {
   computed: {
     ...mapState(['auth', 'sidenav', 'main'])
   },
-  methods: {},
+  methods: {
+    chatWhatsapp () {
+      window.open('https://api.whatsapp.com/send?phone=59178802950&text=Hola', '_blank');
+    }
+  },
   watch: {
     '$route' (to, from) {
       if (!this.$storage.existUser() && PageNoLogin.indexOf(to.path.substring(1)) === -1) {
@@ -91,4 +98,11 @@ export default {
 </script>
 
 <style lang="scss">
+  .bot-whatsapp {
+    position: fixed;
+    z-index: 2;
+    bottom: 25px;
+    right: 25px;
+    cursor: pointer;
+  }
 </style>
