@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     chatWhatsapp () {
-      window.open('https://api.whatsapp.com/send?phone=59178802950&text=Hola', '_blank');
+      window.open('https://api.whatsapp.com/send?phone=59178802950&text=Hola Fortaleza', '_blank');
     }
   },
   watch: {
