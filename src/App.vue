@@ -5,7 +5,7 @@
     <v-content>
       <div class="main">
         <div class="bot-whatsapp">
-          <v-img src="img/whatsapp.png" @click="chatWhatsapp" height="50" width="50"/>
+          <v-img src="img/whatsapp.png" contain @click="chatWhatsapp" height="50" width="50"/>
         </div>
         <transition :name="transitionName" mode="out-in">
           <router-view/>
@@ -100,7 +100,7 @@ export default {
 <style lang="scss">
   .bot-whatsapp {
     position: fixed;
-    z-index: 2;
+    z-index: 10;
     bottom: 25px;
     right: 25px;
     cursor: pointer;
