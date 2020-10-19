@@ -4,7 +4,7 @@
     <app-navbar></app-navbar>
     <v-content>
       <div class="main">
-        <div class="bot-whatsapp">
+        <div class="bot-whatsapp" v-if="!auth">
           <v-img src="img/whatsapp.png" contain @click="chatWhatsapp" height="50" width="50"/>
         </div>
         <transition :name="transitionName" mode="out-in">
