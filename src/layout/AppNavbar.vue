@@ -20,35 +20,35 @@
           outlined
           :class="['ml-1', menuActivo === 'quienes-somos' ? 'activado': '']"
           @click="pushRouter('quienes-somos')"
-        >¿ Quienes Somos ?</v-btn>
+        >{{ $t('quienesSomos')}}</v-btn>
         <v-btn
           text
           color="primary"
           outlined
           :class="['ml-1', menuActivo === 'contactanos' ? 'activado': '']"
           @click="pushRouter('contactanos')"
-        >Contáctanos</v-btn>
+        >{{ $t('contactanos')}}</v-btn>
         <v-btn
           text
           color="primary"
           outlined
           :class="['ml-1', menuActivo === 'mensajes-fortaleza' ? 'activado': '']"
           @click="pushRouter('mensajes-fortaleza')"
-        >Mensajes de Fortaleza</v-btn>
+        >{{ $t('mensajesFortaleza')}}</v-btn>
         <v-btn
           text
           color="primary"
           outlined
           :class="['ml-1', menuActivo === 'voces-fortaleza' ? 'activado': '']"
           @click="pushRouter('voces-fortaleza')"
-        >Voces de Fortaleza</v-btn>
+        >{{ $t('vocesFortaleza')}}</v-btn>
         <v-btn
           text
           color="primary"
           outlined
           :class="['ml-1', menuActivo === 'entregas' ? 'activado': '']"
           @click="pushRouter('entregas')"
-        >Entregas</v-btn>
+        >{{ $t('entregas')}}</v-btn>
         <v-btn
           class="ml-1"
           v-if="!auth"
@@ -57,7 +57,7 @@
           outlined
           :class="['ml-1', menuActivo === 'login' ? 'activado': '']"
           @click="pushRouter('login')"
-        >Ingresar</v-btn>
+        >{{ $t('login')}}</v-btn>
       </template>
       <template v-else>
         <v-tooltip bottom color="primary">
@@ -75,7 +75,7 @@
               <v-icon dark>account_circle</v-icon>
             </v-btn>
           </template>
-          <span>¿ Quienes Somos ?</span>
+          <span>{{ $t('quienesSomos')}}</span>
         </v-tooltip>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
@@ -92,7 +92,7 @@
               <v-icon dark>account_balance</v-icon>
             </v-btn>
           </template>
-          <span>Contáctanos</span>
+          <span>{{ $t('contactanos')}}</span>
         </v-tooltip>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
@@ -110,7 +110,7 @@
               <v-icon dark>campaign</v-icon>
             </v-btn>
           </template>
-          <span>Mensajes de Fortaleza</span>
+          <span>{{ $t('mensajesFortaleza')}}</span>
         </v-tooltip>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
@@ -127,7 +127,7 @@
               <v-icon dark>support_agent</v-icon>
             </v-btn>
           </template>
-          <span>Voces de Fortaleza</span>
+          <span>{{ $t('vocesFortaleza')}}</span>
         </v-tooltip>
         <v-tooltip bottom color="primary">
           <template v-slot:activator="{ on, attrs }">
@@ -144,7 +144,7 @@
               <v-icon dark>store</v-icon>
             </v-btn>
           </template>
-          <span>Entregas</span>
+          <span>{{ $t('entregas')}}</span>
         </v-tooltip>
         <v-tooltip bottom color="primary" v-if="!auth">
           <template v-slot:activator="{ on, attrs }">
@@ -162,7 +162,7 @@
               <v-icon dark>security</v-icon>
             </v-btn>
           </template>
-          <span>Ingresar al sistema</span>
+          <span>{{ $t('login')}}</span>
         </v-tooltip>
       </template>
     </v-card>

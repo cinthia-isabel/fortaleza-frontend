@@ -8,19 +8,19 @@
             <v-col
               cols="12"
             >
-              <div class="login-title">Sistema Fortaleza </div>
+              <div class="login-title">{{ $t('title')}}</div>
             </v-col>
             <v-col
               cols="12"
             >
               <v-text-field
                 autofocus
-                label="Usuario"
+                :label="$t('user')"
                 outlined
                 dense
                 v-model="user"
                 color="primary"
-                :rules="[val => !!val || 'Este campo es requerido']"
+                :rules="[val => !!val || $t('required')]"
               ></v-text-field>
             </v-col>
             <v-col
@@ -31,9 +31,9 @@
                 dense
                 v-model="password"
                 color="primary"
-                :rules="[val => !!val || 'Este campo es requerido']"
-                label="Contraseña"
-                 :type="show ? 'text' : 'password'"
+                :rules="[val => !!val || $t('required')]"
+                :label="$t('password')"
+                :type="show ? 'text' : 'password'"
                 :append-icon="show ? 'visibility' : 'visibility_off'"
                 @click:append="show = !show"
               ></v-text-field>
@@ -42,7 +42,7 @@
               cols="12"
               class="pt-2 text-center"
             >
-              <v-btn type="submit" color="primary">Ingresar</v-btn>
+              <v-btn type="submit" color="primary">{{ $t('ingresar') }}</v-btn>
             </v-col>
           </v-row>
         </v-form>

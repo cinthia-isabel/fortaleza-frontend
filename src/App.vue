@@ -5,6 +5,9 @@
     <v-content>
       <div class="main">
         <div class="bot-whatsapp" v-if="!auth">
+          <v-img src="img/EEUU.png" contain @click="() => changeLanguage('en')" height="50" width="50"/>
+          <v-img src="img/ESPANA.png" contain @click="() => changeLanguage('es')" height="50" width="50"/>
+          <v-img src="img/BRASIL.png" contain @click="() => changeLanguage('pr')" height="50" width="50"/>
           <v-img src="img/whatsapp.png" contain @click="chatWhatsapp" height="50" width="50"/>
         </div>
         <transition :name="transitionName" mode="out-in">
@@ -77,6 +80,9 @@ export default {
   methods: {
     chatWhatsapp () {
       window.open('https://api.whatsapp.com/send?phone=59178999770&text=Hola Fortaleza', '_blank');
+    },
+    changeLanguage (lng) {
+      this.$i18n.locale = lng;
     }
   },
   watch: {
