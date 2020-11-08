@@ -33,7 +33,7 @@
               v-on="on"><v-icon color="primary">refresh</v-icon>
             </v-btn>
           </template>
-          <span> Actualizar listado </span>
+          <span> {{ $t('refresh')}} </span>
         </v-tooltip>
         <!-- END Section buttons -->
 

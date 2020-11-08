@@ -2,6 +2,7 @@
 <template>
   <div class="user--crud">
     <crud-table
+      v-if="ready"
       :headers="headers"
       :url="url"
       :filters="filters"
@@ -60,7 +61,7 @@
     <v-dialog v-model="dialog" persistent width="620">
         <v-card>
           <v-card-title>
-            <span class="headline">Número: {{ item.Celular }}, Tipo de contacto: {{ item.Tipo }}</span>
+            <span class="headline">{{ $t('titleNumber')}}: {{ item.Celular }}, {{ $t('titleTipoContacto')}}: {{ item.Tipo }}</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -70,7 +71,7 @@
                     <v-checkbox
                       v-model="form.noContesta"
                       color="primary"
-                      label="¿No Contesto la llamada?"
+                      :label="$t('noContestoLlamada')"
                       outlined
                       hide-details
                       @change="marcarNoContesto"
@@ -438,15 +439,10 @@ export default {
     minDate: undefined,
     maxDate: undefined,
     url: 'unicall',
+    ready: false,
     item: {},
     order: ['createdAt', 'DESC'],
-    headers: [
-      { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
-      { text: 'Celular', align: 'center', value: 'Celular', sortable: false },
-      { text: 'Fecha de la llamada', value: 'FechaLlamada', sortable: false },
-      { text: 'Tipo', align: 'center', value: 'Tipo', sortable: false },
-      { text: 'Estado', align: 'center', value: 'Estado', sortable: false }
-    ],
+    headers: [],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
     form: {},
@@ -461,6 +457,14 @@ export default {
     clearInterval(this.interval);
   },
   async mounted () {
+    this.headers = [
+      { text: this.$t('columnaAcciones'), divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
+      { text: this.$t('columnaCelular'), align: 'center', value: 'Celular', sortable: false },
+      { text: this.$t('columnaFechaLlamada'), value: 'FechaLlamada', sortable: false },
+      { text: this.$t('columnaTipo'), align: 'center', value: 'Tipo', sortable: false },
+      { text: this.$t('columnaEstado'), align: 'center', value: 'Estado', sortable: false }
+    ];
+    this.ready = true;
     this.aUsuariosDisponibles = await this.$service.get('usuarios-disponibles');
     this.aMotivos = await this.$service.get('motivo-llamada');
     this.interval = setInterval(() => {

@@ -33,11 +33,19 @@ const translation = {
     btnAceptarConfirm: 'Aceptar',
     btnCancelarConfirm: 'Cancelar',
     columnaAcciones: 'Acciones',
+    columnaCelular: 'Celular',
+    columnaFechaLlamada: 'Fecha de la llamada',
+    columnaTipo: 'Tipo',
+    columnaEstado: 'Estado',
     botonAtenderLlamada: 'Atender llamada',
     botonAsignarLlamada: 'Asignar llamada',
     verHistorial: 'Ver historial',
     realizarSeguimiento: 'Realizar seguimiento',
-    tituloAgregarNuevaLLamada: 'Agregar nueva llamada'
+    tituloAgregarNuevaLLamada: 'Agregar nueva llamada',
+    refresh: 'Actualizar listado',
+    titleNumber: 'Número',
+    titleTipoContacto: 'Tipo de contacto',
+    noContestoLlamada: '¿No Contesto la llamada?'
   },
   en: {
     quienesSomos: 'About us?',
@@ -72,11 +80,19 @@ const translation = {
     btnAceptarConfirm: 'OK',
     btnCancelarConfirm: 'Cancel',
     columnaAcciones: 'Actions',
+    columnaCelular: 'Cell phone',
+    columnaFechaLlamada: 'Call date',
+    columnaTipo: 'Call type',
+    columnaEstado: 'Status',
     botonAtenderLlamada: 'Answer Call',
     botonAsignarLlamada: 'Assign Call',
     verHistorial: 'View history',
     realizarSeguimiento: 'Follow up',
-    tituloAgregarNuevaLLamada: 'Add new call'
+    tituloAgregarNuevaLLamada: 'Add new call',
+    refresh: 'Update',
+    titleNumber: 'Number',
+    titleTipoContacto: 'Type of contact',
+    noContestoLlamada: 'Didn\'t I answer the call?'
   },
   pr: {
     quienesSomos: '¿Quem somos?',
@@ -111,11 +127,19 @@ const translation = {
     btnAceptarConfirm: 'Aceitar',
     btnCancelarConfirm: 'Cancelar',
     columnaAcciones: 'Ações',
+    columnaCelular: 'Celular',
+    columnaFechaLlamada: 'Data da ligação',
+    columnaTipo: 'Tipo',
+    columnaEstado: 'Estado',
     botonAtenderLlamada: 'Atender Chamada',
     botonAsignarLlamada: 'Atribuir chamada',
     verHistorial: 'Ver histórico',
     realizarSeguimiento: 'Acompanhamento',
-    tituloAgregarNuevaLLamada: 'Adicionar nova chamada'
+    tituloAgregarNuevaLLamada: 'Adicionar nova chamada',
+    refresh: 'Actualizar',
+    titleNumber: 'Número',
+    titleTipoContacto: 'Tipo de contacto',
+    noContestoLlamada: 'Eu não atendi a chamada?'
   }
 };
 
