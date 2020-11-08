@@ -323,7 +323,7 @@
     <v-dialog v-model="dialogAdd" persistent width="450">
         <v-card>
           <v-card-title>
-            <span class="headline primary--text">Agregar nueva llamada</span>
+            <span class="headline primary--text">{{$t('tituloAgregarNuevaLLamada')}}</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -337,7 +337,7 @@
                       outlined
                       hide-details
                       dense
-                      :rules="[val => !!val || 'No puede estar vacio']"
+                      :rules="[val => !!val || $t('required')]"
                       class="mb-2"
                       required></v-text-field>
                   </v-col>
@@ -345,7 +345,7 @@
                     <v-radio-group
                       v-model="form.tipo"
                       color="primary"
-                      :rules="[val => !!val || 'No puede estar vacio']"
+                      :rules="[val => !!val || $t('required')]"
                     >
                       <v-radio
                         label="Llamada"
@@ -398,7 +398,7 @@
                       return-object
                       clearable
                       prepend-icon="account_circle"
-                      :rules="[item => !!item || 'Este campo no puede estar vacio']"
+                      :rules="[item => !!item || $t('required')]"
                       :items="aUsuariosDisponibles"
                       no-data-text="No existen usuarios"
                     ></v-autocomplete>

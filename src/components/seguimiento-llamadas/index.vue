@@ -19,7 +19,7 @@
                   <v-icon color="info">list_alt</v-icon>
                 </v-btn>
               </template>
-              <span>Ver historial</span>
+              <span>{{ $t('verHistorial')}}</span>
             </v-tooltip>
             <v-tooltip bottom color="success lighten-1">
               <template v-slot:activator="{ on }">
@@ -27,7 +27,7 @@
                   <v-icon color="success">timeline</v-icon>
                 </v-btn>
               </template>
-              <span>Realizar seguimiento</span>
+              <span>{{ $t('realizarSeguimiento') }}</span>
             </v-tooltip>
           </td>
           <td>{{ items.items.Nombres }}</td>

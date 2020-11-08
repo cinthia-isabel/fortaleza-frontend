@@ -33,8 +33,11 @@ const translation = {
     btnAceptarConfirm: 'Aceptar',
     btnCancelarConfirm: 'Cancelar',
     columnaAcciones: 'Acciones',
-    botonAtenderLlamada: 'Atender Llamada',
-    botonAsignarLlamada: 'Asignar Llamada'
+    botonAtenderLlamada: 'Atender llamada',
+    botonAsignarLlamada: 'Asignar llamada',
+    verHistorial: 'Ver historial',
+    realizarSeguimiento: 'Realizar seguimiento',
+    tituloAgregarNuevaLLamada: 'Agregar nueva llamada'
   },
   en: {
     quienesSomos: 'About us?',
@@ -70,7 +73,10 @@ const translation = {
     btnCancelarConfirm: 'Cancel',
     columnaAcciones: 'Actions',
     botonAtenderLlamada: 'Answer Call',
-    botonAsignarLlamada: 'Assign Call'
+    botonAsignarLlamada: 'Assign Call',
+    verHistorial: 'View history',
+    realizarSeguimiento: 'Follow up',
+    tituloAgregarNuevaLLamada: 'Add new call'
   },
   pr: {
     quienesSomos: '¿Quem somos?',
@@ -106,7 +112,10 @@ const translation = {
     btnCancelarConfirm: 'Cancelar',
     columnaAcciones: 'Ações',
     botonAtenderLlamada: 'Atender Chamada',
-    botonAsignarLlamada: 'Atribuir chamada'
+    botonAsignarLlamada: 'Atribuir chamada',
+    verHistorial: 'Ver histórico',
+    realizarSeguimiento: 'Acompanhamento',
+    tituloAgregarNuevaLLamada: 'Adicionar nova chamada'
   }
 };
 
