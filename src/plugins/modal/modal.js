@@ -17,7 +17,7 @@ export default {
         }
       },
 
-      confirm(text = 'Mensaje...', callbackOk, callbackCancel, textOk = 'Aceptar', textCancel = 'Cancelar', width = 360) {
+      confirm(text = 'Mensaje...', callbackOk, callbackCancel, textOk = this.$t('btnAceptarConfirm'), textCancel = this.$t('btnCancelarConfirm'), width = 360) {
         const { confirm } = store.state;
         confirm.show = true;
         confirm.text = text;

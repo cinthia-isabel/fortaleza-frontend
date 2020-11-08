@@ -21,7 +21,7 @@ const translation = {
     menuNuevasLlamadas: 'Nuevas llamadas',
     menuSeguimientoLlamadas: 'Seguimiento de llamadas',
     menuCategoriasLlamada: 'Categorias llamada',
-    menuUsuarios:'Usuarios',
+    menuUsuarios: 'Usuarios',
     menuNumerosBloqueados: 'Números bloqueados',
     menuReportes: 'Reportes',
     menuCuenta: 'Cuenta',
@@ -29,7 +29,12 @@ const translation = {
     mensajeUsuarioEliminado: 'Usuario exitosamente eliminado',
     mensajeUsuarioAutenticado: 'Usuario exitosamente autenticado',
     mensajeCierreSesion: '¿Está seguro de cerrar la sesión?',
-    mensajeTituloConfirmar: 'Confirmar'
+    mensajeTituloConfirmar: 'Confirmar',
+    btnAceptarConfirm: 'Aceptar',
+    btnCancelarConfirm: 'Cancelar',
+    columnaAcciones: 'Acciones',
+    botonAtenderLlamada: 'Atender Llamada',
+    botonAsignarLlamada: 'Asignar Llamada'
   },
   en: {
     quienesSomos: 'About us?',
@@ -52,15 +57,20 @@ const translation = {
     menuNuevasLlamadas: 'New calls',
     menuSeguimientoLlamadas: 'Call tracking',
     menuCategoriasLlamada: 'Call categories',
-    menuUsuarios:'Users',
+    menuUsuarios: 'Users',
     menuNumerosBloqueados: 'Blocked numbers',
     menuReportes: 'Reports',
     menuCuenta: 'Profile',
-    menuCerrarSesion : 'Log out',
+    menuCerrarSesion: 'Log out',
     mensajeUsuarioEliminado: 'User successfully deleted',
     mensajeUsuarioAutenticado: 'Successfully authenticated user',
     mensajeCierreSesion: 'Are you sure to log out?',
-    mensajeTituloConfirmar: 'Confirm'
+    mensajeTituloConfirmar: 'Confirm',
+    btnAceptarConfirm: 'OK',
+    btnCancelarConfirm: 'Cancel',
+    columnaAcciones: 'Actions',
+    botonAtenderLlamada: 'Answer Call',
+    botonAsignarLlamada: 'Assign Call'
   },
   pr: {
     quienesSomos: '¿Quem somos?',
@@ -83,15 +93,20 @@ const translation = {
     menuNuevasLlamadas: 'Novas ligações',
     menuSeguimientoLlamadas: 'Rastreamento de chamadas',
     menuCategoriasLlamada: 'Categorias de chamada',
-    menuUsuarios:'Usuarios',
+    menuUsuarios: 'Usuarios',
     menuNumerosBloqueados: 'Números bloqueados',
     menuReportes: 'Relatórios',
     menuCuenta: 'Perfil',
-    menuCerrarSesion : 'Fechar Sessão',
+    menuCerrarSesion: 'Fechar Sessão',
     mensajeUsuarioEliminado: 'Usuário excluído com sucesso',
     mensajeUsuarioAutenticado: 'Usuário autenticado com sucesso',
     mensajeCierreSesion: 'Tem certeza de que deseja sair?',
-    mensajeTituloConfirmar: 'Confirme'
+    mensajeTituloConfirmar: 'Confirme',
+    btnAceptarConfirm: 'Aceitar',
+    btnCancelarConfirm: 'Cancelar',
+    columnaAcciones: 'Ações',
+    botonAtenderLlamada: 'Atender Chamada',
+    botonAsignarLlamada: 'Atribuir chamada'
   }
 };
 

@@ -36,7 +36,7 @@
                   <v-icon color="success">phone</v-icon>
                 </v-btn>
               </template>
-              <span>Atender llamada</span>
+              <span>{{$t("botonAtenderLlamada")}}</span>
             </v-tooltip>
             <v-tooltip bottom color="secondary" v-if="[1, 3].includes($storage.getUser().id_rol)">
               <template v-slot:activator="{ on }">
@@ -44,7 +44,7 @@
                   <v-icon color="secondary">person_search</v-icon>
                 </v-btn>
               </template>
-              <span>Asignar llamada</span>
+              <span>{{$t("botonAsignarLlamada")}}</span>
             </v-tooltip>
           </td>
           <td>{{ items.items.Celular }}</td>

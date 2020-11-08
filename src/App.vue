@@ -83,7 +83,11 @@ export default {
     },
     changeLanguage (lng) {
       this.$i18n.locale = lng;
+      this.$storage.set('lang', lng);
     }
+  },
+  mounted () {
+    this.$i18n.locale = this.$storage.get('lang') || 'es';
   },
   watch: {
     '$route' (to, from) {

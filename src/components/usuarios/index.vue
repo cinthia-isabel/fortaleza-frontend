@@ -255,7 +255,7 @@ export default {
           idUsuario: items.id
         });
         this.updateList();
-        this.$message.success($t("mensajeUsuarioEliminado"));
+        this.$message.success(this.$t("mensajeUsuarioEliminado"));
       });
     },
     createNewUser() {
