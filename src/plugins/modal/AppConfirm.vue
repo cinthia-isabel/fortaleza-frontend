@@ -2,7 +2,7 @@
 <template>
   <v-dialog v-model="show" persistent content-class="dialog--alert" :max-width="width">
     <v-card>
-      <v-card-title class="title--dialog"><v-icon size="20" color="warning">warning</v-icon> Confirmar</v-card-title>
+      <v-card-title class="title--dialog"><v-icon size="20" color="warning">warning</v-icon> {{$t("mensajeTituloConfirmar")}}</v-card-title>
       <v-card-text v-html="text" class="pt-0"></v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

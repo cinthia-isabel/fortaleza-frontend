@@ -19,16 +19,16 @@ export default {
         if (data.finalizado) {
           this.$storage.set('token', data.data.token);
           this.$storage.setUser(data.data.user);
-          this.$message.success('Usuario exitosamente autenticado');
+          this.$message.success(this.$t("mensajeUsuarioAutenticado"));
           let menus = [
             {
               url: 'llamadas',
-              label: 'Nuevas llamadas',
+              label: this.$t('menuNuevasLlamadas'),
               icon: 'phone'
             },
             {
               url: 'seguimiento-llamadas',
-              label: 'Seguimiento de llamadas',
+              label: this.$t('menuSeguimientoLlamadas'),
               icon: 'contact_phone'
             },
           ];
@@ -36,22 +36,22 @@ export default {
             menus = menus.concat([
               {
                 url: 'categorias-llamada',
-                label: 'Categorias llamada',
+                label: this.$t('menuCategoriasLlamada'),
                 icon: 'list'
               },
               {
                 url: 'usuarios',
-                label: 'Usuarios',
+                label: this.$t('menuUsuarios'),
                 icon: 'supervised_user_circle'
               },
               {
                 url: 'numeros-bloqueados',
-                label: 'Números bloqueados',
+                label: this.$t('menuNumerosBloqueados'),
                 icon: 'phonelink_erase'
               },
               {
                 url: 'reportes',
-                label: 'Reportes',
+                label: this.$t('menuReportes'),
                 icon: 'pie_chart'
               }
             ]);
@@ -59,11 +59,11 @@ export default {
           menus = menus.concat([
             {
               url: 'cuenta',
-              label: 'Cuenta',
+              label: this.$t('menuCuenta'),
               icon: 'security'
             }, {
               url: 'logout',
-              label: 'Cerrar sesión',
+              label: this.$t('menuCerrarSesion'),
               icon: 'power_settings_new'
             }
           ]);

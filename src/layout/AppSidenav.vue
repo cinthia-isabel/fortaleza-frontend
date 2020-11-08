@@ -85,6 +85,7 @@
 </template>
 
 <script>
+/* eslint-disabled */
 import { mapState } from 'vuex';
 import Auth from '@/components/auth/mixins/auth';
 import layout from './mixins/layout';
@@ -126,7 +127,7 @@ export default {
   },
   methods: {
     exit () {
-      this.$confirm('¿Está seguro de salir del sistema?', () => {
+      this.$confirm(this.$t("mensajeCierreSesion"), () => {
         this.logout();
       }, null);
     },
@@ -135,7 +136,7 @@ export default {
     },
     redirect (subItem) {
       if (subItem.url === 'logout') {
-        this.$confirm('¿Está seguro de cerrar la sesión?', () => {
+        this.$confirm(this.$t("mensajeCierreSesion"), () => {
           this.logout();
         });
         return;

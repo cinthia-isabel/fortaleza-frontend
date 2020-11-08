@@ -21,9 +21,9 @@
               v-on="on"
               @click.native.stop="form = {}; dialogAdd = true;"
               slot="activator"
-            ><v-icon dark class="mr-2">add</v-icon>Agregar llamada </v-btn>
+            ><v-icon dark class="mr-2">add</v-icon>{{$t("botonAgregarLlamada")}} </v-btn>
           </template>
-          <span> Agregar llamada </span>
+          <span> {{$t("botonAgregarLlamada")}} </span>
         </v-tooltip>
       </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
