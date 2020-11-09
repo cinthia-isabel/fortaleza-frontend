@@ -2,6 +2,7 @@
 <template>
   <div class="user--crud">
     <crud-table
+      v-if="ready"
       :headers="headers"
       :url="url"
       :filters="filters"
@@ -97,13 +98,13 @@
                   ></v-switch>
                 </v-col>
                 <v-col cols="12">
-                  <small class="red--text">* Todos los campos marcados son requeridos</small>
+                  <small class="red--text">* {{$t("camposRequeridosLabel")}}</small>
                 </v-col>
                 <v-col cols="12">
                   <v-card-actions class="mb-0 pb-0">
                     <v-spacer></v-spacer>
-                    <v-btn text @click="dialog = false">Cancelar</v-btn>
-                    <v-btn type="submit" color="primary">Guardar</v-btn>
+                    <v-btn text @click="dialog = false">{{$t("btnCancelarConfirm")}}</v-btn>
+                    <v-btn type="submit" color="primary">{{$t("botonGuardar")}}</v-btn>
                   </v-card-actions>
                 </v-col>
               </v-row>
@@ -128,26 +129,31 @@ export default {
     url: 'categorias-llamada',
     item: {},
     order: ['createdAt', 'DESC'],
-    headers: [
-      { text: 'Descripcion', align: 'center', value: 'Descripcion' },
-      { text: 'Estado', align: 'center', value: 'Estado' },
-      {
-        text: 'Acciones',
-        divider: false,
-        sortable: false,
-        align: 'center',
-        value: 'ACTIONS',
-      },
-    ],
+    headers: [],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
     form: {},
     filters: [],
+    ready: false,
   }),
   watch: {
     mCalendar(date) {
       this.form.fechaSeguimiento = this.formatDate(date);
     },
+  },
+  mounted () {
+    this.headers = [
+      { text: this.$t("columnaDescripcion"), align: 'center', value: 'Descripcion' },
+      { text: this.$t("columnaEstado"), align: 'center', value: 'Estado' },
+      {
+        text: this.$t("columnaAcciones"),
+        divider: false,
+        sortable: false,
+        align: 'center',
+        value: 'ACTIONS',
+      },
+    ];
+    this.ready = true;
   },
   methods: {
     deleteCategory({ items }) {
@@ -179,7 +185,7 @@ export default {
             });
           }
           if (response.finalizado) {
-            this.$message.success('Registro exitosamente actualizado');
+            this.$message.success(this.$t("successMessage"));
           } else {
             this.$message.error(response.mensaje);
           }
@@ -191,7 +197,7 @@ export default {
           }, 100);
         } else {
           this.$waiting(false);
-          this.$message.error('Faltan campos por llenar');
+          this.$message.error(this.$t("errorCamposFaltantes"));
         }
       } catch (error) {
         this.$waiting(false);

@@ -2,6 +2,7 @@
 <template>
   <div class="user--crud">
     <crud-table
+      v-if="ready"
       :headers="headers"
       :url="url"
       :filters="filters"
@@ -22,10 +23,10 @@
               @click.native.stop="createNewUser"
               slot="activator"
             >
-              <v-icon dark class="mr-2">person_add</v-icon>Agregar Usuario
+              <v-icon dark class="mr-2">person_add</v-icon>{{$t("botonAgregarUsuario")}}
             </v-btn>
           </template>
-          <span>Agregar usuario</span>
+          <span>{{$t("tituloAgregarUsuario")}}</span>
         </v-tooltip>
       </template>
       <!-- SLOT PARA TODOS LOS ITEMS (Solo en caso de que se quiera personalizar cada columna o mas de 1 columna) -->
@@ -45,7 +46,7 @@
                   <v-icon color="secondary">edit</v-icon>
                 </v-btn>
               </template>
-              <span>Editar usuario</span>
+              <span>{{$t('tituloEditarUsuario')}}</span>
             </v-tooltip>
             <v-tooltip bottom color="error">
               <template v-slot:activator="{ on }">
@@ -53,7 +54,7 @@
                   <v-icon color="error">delete_forever</v-icon>
                 </v-btn>
               </template>
-              <span>Eliminar usuario</span>
+              <span>{{$t("eliminarUsuarioTooltip")}}</span>
             </v-tooltip>
           </td>
         </tr>
@@ -63,7 +64,7 @@
     <v-dialog v-model="dialog" persistent width="450">
       <v-card>
         <v-card-title>
-          <span class="headline">{{ itemSeleccionado ? 'Editar usuario' : 'Agregar usuario'}}</span>
+          <span class="headline">{{ itemSeleccionado ? this.$t("tituloEditarUsuario") : this.$t("tituloAgregarUsuario")}}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -73,7 +74,7 @@
                   <v-text-field
                     v-model="form.Nombre"
                     color="primary"
-                    label="Nombres"
+                    :label="$t('campoNombres')"
                     outlined
                     hide-details
                     dense
@@ -86,7 +87,7 @@
                   <v-text-field
                     v-model="form.Paterno"
                     color="primary"
-                    label="Apellido Paterno"
+                    :label="$t('campoApellidoPaterno')"
                     outlined
                     hide-details
                     dense
@@ -98,7 +99,7 @@
                   <v-text-field
                     v-model="form.Materno"
                     color="primary"
-                    label="Apellido Materno"
+                    :label="$t('campoApellidoMaterno')"
                     outlined
                     hide-details
                     dense
@@ -110,7 +111,7 @@
                   <v-text-field
                     v-model="form.Interno"
                     color="primary"
-                    label="Interno"
+                    :label="$t('campoInterno')"
                     outlined
                     hide-details
                     dense
@@ -123,7 +124,7 @@
                   <v-text-field
                     v-model="form.WB"
                     color="primary"
-                    label="Número corporativo"
+                    :label="$t('campoCorporativo')"
                     outlined
                     hide-details
                     dense
@@ -134,7 +135,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12">
                   <v-text-field
-                    label="Telefono/Celular"
+                    :label="$t('campoTelefono')"
                     v-model="form.Celular"
                     :rules="[val => !!val || 'El campo no puede estar vacio']"
                     hide-details
@@ -145,7 +146,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12">
                   <v-text-field
-                    label="Correo electrónico"
+                    :label="$t('campoCorreo')"
                     v-model="form.Correo"
                     hide-details
                     dense
@@ -156,7 +157,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12">
                   <v-text-field
-                    label="Ciudad"
+                    :label="$t('campoCiudad')"
                     v-model="form.Ciudad"
                     :rules="[val => !!val || 'El campo no puede estar vacio']"
                     hide-details
@@ -167,7 +168,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12">
                   <v-autocomplete
-                    label="Rol"
+                    :label="$t('campoRol')"
                     v-model="form.id_rol"
                     :rules="[val => !!val || 'El campo no puede estar vacio']"
                     hide-details
@@ -182,13 +183,13 @@
                   ></v-autocomplete>
                 </v-col>
                 <v-col cols="12">
-                  <small class="red--text">* Todos los campos marcados son requeridos</small>
+                  <small class="red--text">* {{$t("camposRequeridosLabel")}}</small>
                 </v-col>
                 <v-col cols="12">
                   <v-card-actions class="mb-0 pb-0">
                     <v-spacer></v-spacer>
-                    <v-btn text @click="dialog = false">Cancelar</v-btn>
-                    <v-btn type="submit" color="primary">Guardar</v-btn>
+                    <v-btn text @click="dialog = false">{{$t("btnCancelarConfirm")}}</v-btn>
+                    <v-btn type="submit" color="primary">{{$t("botonGuardar")}}</v-btn>
                   </v-card-actions>
                 </v-col>
               </v-row>
@@ -213,27 +214,13 @@ export default {
     url: 'usuarios',
     itemSeleccionado: null,
     order: ['createdAt', 'DESC'],
-    headers: [
-      { text: 'Nombres', align: 'center', value: 'Nombre' },
-      { text: 'Paterno', align: 'center', value: 'Paterno' },
-      { text: 'Materno', align: 'center', value: 'Materno' },
-      { text: 'Interno', align: 'center', value: 'Interno', sortable: true },
-      { text: 'Número corporativo', align: 'center', value: 'WB', sortable: true },
-      { text: 'Ciudad', align: 'center', value: 'Ciudad' },
-      { text: 'Rol', align: 'center', value: 'rol' },
-      {
-        text: 'Acciones',
-        divider: false,
-        sortable: false,
-        align: 'center',
-        value: 'ACTIONS',
-      },
-    ],
+    headers: [],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
     form: {},
     filters: [],
-    aRoles: []
+    aRoles: [],
+    ready: false,
   }),
   watch: {
     mCalendar(date) {
@@ -250,7 +237,7 @@ export default {
       return rolName;
     },
     deleteUser({ items }) {
-      this.$confirm('¿Desea eliminar el usuario?', async () => {
+      this.$confirm(this.$t("mensajeBorrarUsuario"), async () => {
         await this.$service.delete('usuario', {
           idUsuario: items.id
         });
@@ -280,7 +267,7 @@ export default {
             });
           }
           if (response.finalizado) {
-            this.$message.success('Registro exitosamente actualizado');
+            this.$message.success(this.$t("successMessage"));
           } else {
             this.$message.error(response.mensaje);
           }
@@ -292,7 +279,7 @@ export default {
           }, 100);
         } else {
           this.$waiting(false);
-          this.$message.error('Faltan campos por llenar');
+          this.$message.error(this.$t("errorCamposFaltantes"));
         }
       } catch (error) {
         this.$waiting(false);
@@ -332,6 +319,23 @@ export default {
     CrudTable,
   },
   mounted () {
+    this.headers = [
+      { text: this.$t("columnaNombres"), align: 'center', value: 'Nombre' },
+      { text: this.$t("columnaPaterno"), align: 'center', value: 'Paterno' },
+      { text: this.$t("columnaMaterno"), align: 'center', value: 'Materno' },
+      { text: this.$t("columnaInterno"), align: 'center', value: 'Interno', sortable: true },
+      { text: this.$t("columnaCorporativo"), align: 'center', value: 'WB', sortable: true },
+      { text: this.$t("columnaCiudad"), align: 'center', value: 'Ciudad' },
+      { text: this.$t("columnaRol"), align: 'center', value: 'rol' },
+      {
+        text: this.$t("columnaAcciones"),
+        divider: false,
+        sortable: false,
+        align: 'center',
+        value: 'ACTIONS',
+      },
+    ];
+    this.ready = true;
     this.$nextTick(async() => {
       this.aRoles = await this.$service.get('roles');
     });

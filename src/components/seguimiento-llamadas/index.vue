@@ -246,13 +246,13 @@
                     </v-radio-group>
                   </v-col>
                   <v-col cols="12">
-                    <small class="red--text">* Todos los campos marcados son requeridos</small>
+                    <small class="red--text">* {{$t("camposRequeridosLabel")}}</small>
                   </v-col>
                   <v-col cols="12">
                     <v-card-actions class="mb-0 pb-0">
                       <v-spacer></v-spacer>
-                      <v-btn text @click="cancelCall">Cancelar</v-btn>
-                      <v-btn type="submit" color="primary">Guardar</v-btn>
+                      <v-btn text @click="cancelCall">{{$t("btnCancelarConfirm")}}</v-btn>
+                      <v-btn type="submit" color="primary">{{$t("botonGuardar")}}</v-btn>
                     </v-card-actions>
                   </v-col>
                 </v-row>
@@ -360,7 +360,7 @@ export default {
             idSeg: this.itemSeleccionado.id_seg
           });
           if (response.finalizado) {
-            this.$message.success('Registro exitosamente actualizado');
+            this.$message.success(this.$t("successMessage"));
           } else {
             this.$message.error(response.mensaje);
           }
@@ -371,7 +371,7 @@ export default {
           }, 100);
         } else {
           this.$waiting(false);
-          this.$message.error('Faltan campos por llenar');
+          this.$message.error(this.$t("errorCamposFaltantes"));
         }
       } catch (error) {
         this.$waiting(false);

@@ -72,7 +72,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.loginWithCredentials(this.user.trim(), this.password.trim());
       } else {
-        this.$message.error('Por favor revise los campos requeridos');
+        this.$message.error(this.$t("mensajeErrorCamposRequeridos"));
       }
     }
   }
