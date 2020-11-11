@@ -2,6 +2,7 @@
 <template>
   <div class="user--crud">
     <crud-table
+      v-if="ready"
       :headers="headers"
       :url="url"
       :filters="filters"
@@ -265,7 +266,7 @@
     <v-dialog v-model="historialSeguimiento" persistent width="620">
         <v-card>
           <v-card-title>
-            <span class="headline primary--text">Historial de seguimiento</span>
+            <span class="headline primary--text">{{this.$t("tituloHistorialSeguimiento")}}</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -285,7 +286,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="secondary" @click="historialSeguimiento = false">Cerrar seguimiento</v-btn>
+            <v-btn color="secondary" @click="historialSeguimiento = false">{{this.$t("botonCerrarSeguimiento")}}</v-btn>
           </v-card-actions>
         </v-card>
     </v-dialog>
@@ -310,20 +311,12 @@ export default {
     url: 'seguimiento-llamadas',
     itemSeleccionado: {},
     order: ['createdAt', 'DESC'],
-    headers: [
-      { text: 'Acciones', divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
-      { text: 'Nombres', align: 'center', value: 'Nombres', sortable: true },
-      { text: 'Apellidos', align: 'center', value: 'Apellidos' },
-      { text: 'Ciudad', align: 'center', value: 'Ciudad' },
-      { text: 'Celular', align: 'center', value: 'celular' },
-      { text: 'Fecha de seguimiento', align: 'center', value: 'FechaComp' },
-      { text: 'Hora de seguimiento', align: 'center', value: 'HoraComp' },
-      { text: 'Tipo', align: 'center', value: 'Tipo' },
-    ],
+    headers: [],
     breakpoints: ['md', 'lg', 'xl'],
     menuDatepicker: null,
     form: {},
     filters: [],
+    ready: false
   }),
   watch: {
     mCalendar (date) {
@@ -334,6 +327,17 @@ export default {
     clearInterval(this.interval);
   },
   async mounted () {
+    this.headers = [
+      { text: this.$t("columnaAcciones"), divider: false, sortable: false, align: 'center', value: 'ACTIONS' },
+      { text: this.$t("columnaNombres"), align: 'center', value: 'Nombres', sortable: true },
+      { text: this.$t("columnaApellidos"), align: 'center', value: 'Apellidos' },
+      { text: this.$t("columnaCiudad"), align: 'center', value: 'Ciudad' },
+      { text: this.$t("columnaCelular"), align: 'center', value: 'celular' },
+      { text: this.$t("columnaFechaSeguimiento"), align: 'center', value: 'FechaComp' },
+      { text: this.$t("columnaHoraSeguimiento"), align: 'center', value: 'HoraComp' },
+      { text: this.$t("columnaTipo"), align: 'center', value: 'Tipo' },
+    ];
+    this.ready = true;
     this.aMotivos = await this.$service.get('motivo-llamada');
     this.interval = setInterval(() => {
       this.updateList();

@@ -73,7 +73,12 @@ const translation = {
     campoCiudad: "Ciudad",
     campoRol: 'Rol',
     mensajeBorrarUsuario: '¿Desea eliminar el usuario?',
-    labelFilas: 'Filas por página'
+    labelFilas: 'Filas por página',
+    columnaApellidos: 'Apellidos',
+    columnaFechaSeguimiento: 'Fecha de seguimiento',
+    columnaHoraSeguimiento: 'Hora de seguimiento',
+    tituloHistorialSeguimiento: 'Historial de seguimiento',
+    botonCerrarSeguimiento: 'Cerrar seguimiento',
   },
   en: {
     quienesSomos: 'About us?',
@@ -148,7 +153,12 @@ const translation = {
     campoCiudad: "City",
     campoRol: 'Role',
     mensajeBorrarUsuario: 'Do you want to delete the user?',
-    labelFilas: 'Rows per page'
+    labelFilas: 'Rows per page',
+    columnaApellidos: 'Last name',
+    columnaFechaSeguimiento: 'Follow-up date',
+    columnaHoraSeguimiento: 'Tracking time',
+    tituloHistorialSeguimiento: 'Tracking history',
+    botonCerrarSeguimiento: 'Close tracking'
   },
   pr: {
     quienesSomos: '¿Quem somos?',
@@ -223,7 +233,12 @@ const translation = {
     campoCiudad: "Cidade",
     campoRol: 'Função',
     mensajeBorrarUsuario: 'Você quer deletar o usuário?',
-    labelFilas: 'Linhas por página'
+    labelFilas: 'Linhas por página',
+    columnaApellidos: 'Apellidos',
+    columnaFechaSeguimiento: 'Data de seguimento',
+    columnaHoraSeguimiento: 'Tempo de rastreamento',
+    tituloHistorialSeguimiento: 'Histórico de rastreamento',
+    botonCerrarSeguimiento: 'Fechar rastreamento'
   }
 };
 
